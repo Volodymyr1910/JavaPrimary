@@ -41,8 +41,8 @@ public class QuadraticEquation {
     }
 
 
-    public String display() {
-        return "QuadraticEquation{" +
+    public String display2() {
+        return "Good! We have QuadraticEquation{" +
                 "a=" + a +
                 ", b=" + b +
                 ", c=" + c +
@@ -50,22 +50,35 @@ public class QuadraticEquation {
     }
 
     // Создать методы public double delta() и public int quantityRoots() для вычисления дискриминанта и количества решений уравнения соответственно.
+    public void display (){
+        System.out.println("We have quadratic equation -> a*x^2 - b*x + c = 0");
+        System.out.println("Set values for variable a, b and c, please. ");
+    }//end display
+
+    public void deltaChecker (double D){
+        if(D >= 0 ){
+            System.out.println("Discriminator of the equation is -> " + D + ".");
+        }else{
+            System.out.println(" Discriminant is less than 0. There's no roots in our quadratic equation !");
+        }
+    }//end delta
 
     public double delta (double a, double b, double c){
-        return b * b - 4 * a * c;  }//end delta
+        return b * b - 4 * a * c;
+    }//end delta
 
     public double quantityRootsX1 (){
-       return (-b - Math.sqrt(delta(a, b, c)) / (2 * a));
+
+        return (-b - (Math.sqrt(delta(a, b, c)))) / (2 * a);
     }//end quantityRootsX1
 
     public double quantityRootsX2 (){
-        double x1 =
-        return (-b + Math.sqrt(delta(a, b, c)) / (2 * a));
+        return (-b + (Math.sqrt(delta(a, b, c)))) / (2 * a);
     }//end quantityRootsX2
 
     public boolean quantityEquationChecker (){
         boolean flag = false;
-        if (a * x1 * x1 + b * x2 + c == 0){
+        if ((a * quantityRootsX1() * quantityRootsX1() - (b * quantityRootsX2()) + c) == 0){
             flag = true;
         }//ernd if
         return flag;

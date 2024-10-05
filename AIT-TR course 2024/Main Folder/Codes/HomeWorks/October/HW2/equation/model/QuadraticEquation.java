@@ -42,7 +42,7 @@ public class QuadraticEquation {
 
 
     public String display2() {
-        return "Good! We have QuadraticEquation{" +
+        return "Good! We have input values for a quadratic equation {" +
                 "a=" + a +
                 ", b=" + b +
                 ", c=" + c +

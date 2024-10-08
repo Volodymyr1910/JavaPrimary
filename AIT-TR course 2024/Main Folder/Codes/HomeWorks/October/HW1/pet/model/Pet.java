@@ -60,6 +60,7 @@ public class Pet {
         System.out.println(type + " " + petName + " is sleeping. So tired, yes?");
     }//end sleep
 
+
     public void eat() {
         System.out.println(type + " " + petName + " is eating.");
     }//end eat

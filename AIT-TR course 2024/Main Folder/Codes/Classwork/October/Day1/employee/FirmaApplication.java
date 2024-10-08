@@ -35,6 +35,7 @@ public class FirmaApplication {
 
         e5.setSalary(6000);
         System.out.println(e5.displayEmployee());
+        System.out.println(employees.toString());
 
     }//end main
 }//end class

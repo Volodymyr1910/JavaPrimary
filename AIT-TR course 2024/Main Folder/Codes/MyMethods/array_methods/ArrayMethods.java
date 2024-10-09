@@ -1,10 +1,6 @@
-package array_methods;
-
-import java.util.Arrays;
+package MyMethods.array_methods;
 
 public class ArrayMethods {
-
-
 
 //// ------------------------------------- Searching in array  ----------------------------------------------
 
@@ -290,16 +286,16 @@ public class ArrayMethods {
 //// ------------------------------------- Copy or transfer array with CHANGING ARRAY TYPE ------------------
 
     // make copy elements from one INT ARRAY to another DOUBLE ARRAY
-    // если размер arrayFrom больше - будет error
-    //если размер arrayTo больше -  в нем останутся пустые ячейки или ячейки с его "родными" елементами
-    public static double[] copyArrayWithChangeIntToDouble (int[] arrayFrom, double[] arrayTo) {
+    // розмір нового масиву такий самий як розмір масиву-донора
+    public static double[] copyArrayWithChangeIntToDoubleAutoSize (int[] arrayFrom) {
         int u = 0;
+        double arrayTo [] = new double[arrayFrom.length];
         for (int i = 0; i < arrayFrom.length; i++) {
             arrayTo[u] = arrayFrom[i];
             u++;
         }
         return arrayTo;
-    }//end copyArrayWithChangeIntToDouble
+    }//end copyArrayWithChangeIntToDoubleAutoSize
 
 //// ------------------------------------- Copy or transfer array -------------------------------------------
 

@@ -1,17 +1,19 @@
-package array_methods;
+package MyMethods.array_methods;
 
 import java.util.Arrays;
 
+public class ArrayMethods_String {
 
-//// ------------------------------------- Searching in array  ----------------------------------------------
-
+//// ------------------------------------- Other operations with array  -------------------------------------
 
 //// ------------------------------------- Sorting array ----------------------------------------------------
 
+//// ------------------------------------- Copy or transfer array -------------------------------------------
+
+//// ------------------------------------- Fill array -------------------------------------------------------
 
 //// ------------------------------------- Copy or transfer array with CHANGING ARRAY -----------------------
 
-public class ArrayMethods_String {
     //разворачивает символы каждого елемента массива в обратном порядке и формирует новый массив, елементы остаются на родных индексах
     // arrayFrom {abcd, fghj, klöä} -> arrayTo {dcba, jhgf, äölk}
     public static String[] reverseArrayString(String[] array) {
@@ -30,6 +32,20 @@ public class ArrayMethods_String {
         //System.out.println();
         return arrayTo;
     }//end transferFromOneArrayToAnotherWithTurnAroundString
+
+    // make copy elements from one STRING ARRAY to another INT ARRAY
+    // розмір нового масиву такий самий як розмір масиву-донора
+    public static int [] copyArrayWithChangeStringToIntAutoSize (String[] arrayFrom) {
+        int u = 0;
+        int arrayTo[] = new int[arrayFrom.length];
+        for (int i = 0; i < arrayFrom.length; i++) {
+            arrayTo[u] = Integer.parseInt(String.valueOf(arrayFrom[i]));
+            u++;
+        }
+        return arrayTo;
+    }//copyArrayWithChangeStringToIntAutoSize
+
+    //// ------------------------------------- Searching in array  ----------------------------------------------
 
     //переносить в новий масив з масиву-донора тільки букви
     // працює ТІЛЬКИ з ПОСИМВОЛЬНИМИ масивами (елемент массиву - не слово, а 1 символ)
@@ -83,27 +99,21 @@ public class ArrayMethods_String {
         return count;
     }//end  howMuchDigitsInArray
 
-//// ------------------------------------- Copy or transfer array -------------------------------------------
-
-
-    //// ------------------------------------- Other operations with array  -------------------------------------
-
-
 //// ------------------------------------- Total and Average of array  --------------------------------------
 
     // повертає сумму кодів за таблицею ASCII всіх елементів массиву
     // массив має бути посимвольним з типом String.
-    public static double sumArrayByASCII (String[] array) {
+    public static double sumArrayByASCII(String[] array) {
         double sum = 0;
         for (int i = 0; i < array.length; i++) {
-                sum = sum + array[i].charAt(0);
+            sum = sum + array[i].charAt(0);
         }//end for
         return sum;
     }//end sumArrayByASCII
 
 //// ------------------------------------- Print array ------------------------------------------------------
 // String [] array = {"saf", "qwe", "jhgjhg"};
-// System.out.println(Arrays.toString(array)); // метод toString распечатыывает массивы, но результат не возвращает
+// System.out.println(Arrays.toString(array)); // метод toString распечатывает массивы, но результат не возвращает
 
     //print String[] array
     public static void printArrayString(String[] array) {
@@ -118,10 +128,6 @@ public class ArrayMethods_String {
         System.out.println();
         System.out.println("------------------------------");
     }//end printArrayString
-
-
-//// ------------------------------------- Fill array -------------------------------------------------------
-
 
 }//end class
 

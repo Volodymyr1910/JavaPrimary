@@ -178,6 +178,54 @@ public class ArrayMethods {
         return -1;
     }//end linearSearchFromStartToEnd
 
+    //finding min element in array
+    public static int MinElementInAray (int [] array) {
+        int min = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }//end if
+        }//end for
+        return min;
+    }//MinElementInAray
+
+    //finding max element in array
+    public static int MaxElementInAray (int [] array) {
+        int max = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }//end if
+        }//end for
+        return max;
+    }//MaxElementInAray
+
+    //finding index of min element in array
+    public static int indexOfMinElementInAray (int [] array) {
+        int min = array[0];
+        int indexOfMin = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+                indexOfMin = i;
+            }//end if
+        }//end for
+        return indexOfMin;
+    }//indexOfMinElementInAray
+
+    //finding index of max element in array
+    public static int indexOfMaxElementInAray (int [] array) {
+        int max = array[0];
+        int indexOfMax = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+                indexOfMax = i;
+            }//end if
+        }//end for
+        return indexOfMax;
+    }//indexOfMaxElementInAray
+
     // считает сколько искомых элементов есть в массиве
     public static int howMuchTimesFindElement (int[] array, int n) {
         int times = 0;

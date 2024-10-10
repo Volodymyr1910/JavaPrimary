@@ -22,9 +22,9 @@ public class DigitsInSentence {
 
         //casting
         int [] digitArray = StringMethods.copyArrayWithChangeStringToIntAutoSize(array);
+        //int [] digitArray2 = ArrayMethods_String.copyArrayWithChangeStringToIntAutoSize(array); не видит мой метод
 
         //finding total
-
         int sum = ArrayMethods.sumArray(digitArray);
         System.out.println("Total of your entered numbers is -> " + sum + ".");
     }//end main

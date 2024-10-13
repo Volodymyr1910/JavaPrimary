@@ -43,7 +43,7 @@ public class ArrayMethods_String {
             u++;
         }
         return arrayTo;
-    }//copyArrayWithChangeStringToIntAutoSize
+    }// end copyArrayWithChangeStringToIntAutoSize
 
     //// ------------------------------------- Searching in array  ----------------------------------------------
 

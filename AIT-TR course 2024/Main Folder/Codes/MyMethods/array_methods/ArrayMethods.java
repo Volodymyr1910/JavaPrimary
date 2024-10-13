@@ -5,7 +5,7 @@ public class ArrayMethods {
 //// ------------------------------------- Searching in array  ----------------------------------------------
 
     //finding element, that's different from others; USEFULL when array have many equal elements
-    //знаходить елемент який быльше або меньше інших елементів
+    //знаходить елемент який більше або менше інших елементів
     //якщо таких елементів не один - то повертає індекс першого знайденого зліва
     public static int findIndexOfAnotherElement (int  array []) {
         int hereYouAre = 0;
@@ -102,6 +102,17 @@ public class ArrayMethods {
         return count;
     }//end  howMuchEvenNumbersInArray
 
+    // рахує скільки в масиві негативних елементів
+    public static int howMuchNegativeNumbersInArray (int[] array) {
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 0) {
+                count++;
+            }//end if
+        }//end for
+        return count;
+    }//end  howMuchNegativeNumbersInArray
+
     // рахує скільки в масиві позитивних елементів
     public static int howMuchPositiveNumbersInArray (int[] array) {
         int count = 0;
@@ -112,6 +123,17 @@ public class ArrayMethods {
         }//end for
         return count;
     }//end  howMuchPositiveNumbersInArray
+
+    // рахує скільки в масиві нулів
+    public static int howMuchZeroInArray (int[] array) {
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == 0) {
+                count++;
+            }//end if
+        }//end for
+        return count;
+    }//end  howMuchZeroInArray
 
     //binary search works only with sortirated arrays from high to small
     //O(log(n))  returns index of founded element (if element absent - return "-1")
@@ -199,6 +221,34 @@ public class ArrayMethods {
         }//end for
         return max;
     }//MaxElementInAray
+
+    // ищем в массиве заданное число, а именно индекс его пятого повторения
+    // метод находит индекс, на котором искомое число встречается пятый раз
+    // если повторений в массиве искомого числа менее 5, то метод вернет последний индекс, где было найдено искомое число
+    // если искомого числа нет, вернет -1
+    public static int returnFifthIndexOfRepeatedElement (int[] array, int n) {
+        int fifthIndex = -1;
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == n) {
+                fifthIndex = i;
+                count++;
+                if (count == 5) i = array.length-1;
+            }//end if
+        }//end for
+        return fifthIndex;
+    }//returnFifthIndexOfRepeatedElement
+
+    // giving back number from array, which stay in array under selected index
+    public static int returnNumberfromArrayUnderSelectedIndex (int[] array, int n) {
+        int temp = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (i == n) {
+                temp = array[i];
+            }//end if
+        }//end for
+        return temp;
+    }//end returnNumberfromArrayUnderSelectedIndex
 
     //finding index of min element in array
     public static int indexOfMinElementInAray (int [] array) {
@@ -392,6 +442,28 @@ public class ArrayMethods {
 
 
 //// ------------------------------------- Total and Average of array  --------------------------------------
+
+    // возвращает сумму всех элементов массива, которые имеют четные индексы
+    public static int sumArrayElementsWithEvenIndexes (int[] array) {
+        int res = 0;
+        for (int i = 0; i < array.length; i++) {
+            if(i % 2 == 0) {
+                res += array[i];
+            }//end if
+        }//end for
+        return res;
+    }//sumArrayElementsWithEvenIndexes
+
+    // возвращает сумму всех элементов массива, которые имеют нечетные индексы
+    public static int sumArrayElementsWithOddIndexes (int[] array) {
+        int res = 0;
+        for (int i = 0; i < array.length; i++) {
+            if(i % 2 > 0) {
+                res += array[i];
+            }//end if
+        }//end for
+        return res;
+    }//sumArrayElementsWithOddIndexes
 
     // возвращает сумму всех элементов массива
     public static int sumArray (int[] array) {

@@ -25,7 +25,7 @@ public class StringMethods {
         for (int i = 0; i < arrayFrom.length; i++) {
             arrayTo[u] = Integer.parseInt(String.valueOf(arrayFrom[i]));
             u++;
-        }
+        }// end copyArrayWithChangeStringToIntAutoSize
         return arrayTo;
     }//copyArrayWithChangeStringToIntAutoSize
 

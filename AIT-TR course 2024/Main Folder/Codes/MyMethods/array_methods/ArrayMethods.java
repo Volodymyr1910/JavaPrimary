@@ -1,5 +1,7 @@
 package MyMethods.array_methods;
 
+import MyMethods.int_methods.IntMethods;
+
 public class ArrayMethods {
 
 //// ------------------------------------- Searching in array  ----------------------------------------------
@@ -79,6 +81,17 @@ public class ArrayMethods {
         }//end for
         return temp;
     }// end tranferToNewArrayOnlyPositiveAutoSize
+
+    // рахує скільки в масиві простих чисел (просте число - число, більше за одиницю, яке ділиться без остачі тільки на 1 і самого себе)
+    public static int howMuchPrimeNumbersInArray (int [] array){
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if ((array[i] > 1)  && (IntMethods.isPrimeNumber(array[i]))) {
+                count++;
+            }//end if
+        }//end for
+        return count;
+    }//end howMuchPrimeNumbersInArray
 
     // рахує скільки в масиві не парних елементів *** число 0 відкидається ***
     public static int howMuchOddNumbersInArray (int[] array) {

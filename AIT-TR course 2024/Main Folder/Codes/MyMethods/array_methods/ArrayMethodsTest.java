@@ -1,6 +1,7 @@
 package MyMethods.array_methods;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -121,6 +122,17 @@ class ArrayMethodsTest {
         int array[] = {10, -5, 0, -8, 12, 20, 0, -2, 4, 1};
         assertEquals(2, ArrayMethods.howMuchZeroInArray(array), "Method Failed");
     }
+
+
+    //Задача 3.(*) Для метода проверки, является ли число простым, написать тест. Использовать assert для логических выражений.
+    @Test
+    @DisplayName("Для метода проверки, является ли число простым, написать тест. Использовать assert для логических выражений.")
+    void howMuchPrimeInArrayTest () {
+        int array[] = {0, 1, 2, 3, 4, 5, 6, 7, -3, 13};
+        assertEquals(5, ArrayMethods.howMuchPrimeNumbersInArray(array), "Method Failed");
+    }
+
+
 
 }//end class
 

@@ -85,4 +85,34 @@ public class ItalyJourney {
         sb.append('}');
         return sb.toString();
     }
+
+    public static int bestPriceFinder (ItalyJourney [] array, Float[] roadCostArray, Float[] rentCostArray, Float[] totalCostArray, float DIESEL_COST, float GASOLINE_COST, int RANGE_OF_TRIP, int CLEAN_RELAX, float DAY_DRIVING, float AVERAGE_SPEED) {
+
+        int count = 0; // вводим переменные чтоб знать какому элементу принадлежит минимальная стоимость поездки
+        Float minCostTemp = 0f;
+
+        float drivingDays = RANGE_OF_TRIP / (AVERAGE_SPEED * DAY_DRIVING); //считаем сколько дней в пути
+
+        for (int i = 0, j = 0, k = 0; i < array.length; i++, j++, k++) {
+            // находим затраты на аренду для всех авто и заносим в массив
+            rentCostArray[i] = (((drivingDays / 7) + 1) + CLEAN_RELAX ) * (array[i].getWeekRentCost());
+
+            // находим затраты на дорогу для всех авто и заносим в массив
+            roadCostArray[j] = (RANGE_OF_TRIP / 10) * (array[i].getFuelConsumption());
+            if (array[j].getFuelType() == 'd') roadCostArray[j] *= DIESEL_COST;
+            else roadCostArray[j] *= GASOLINE_COST;
+
+            //считаем общие затраты и находим самый дешевый вариант
+            totalCostArray[k] = roadCostArray[j] + rentCostArray[i];
+            if (totalCostArray[k] < minCostTemp) {
+                minCostTemp = totalCostArray[k];
+                count = k;
+            }//end if
+        }//end for
+        return count;
+    }//bestPriceFinder
+
+
+
+
 }//end class

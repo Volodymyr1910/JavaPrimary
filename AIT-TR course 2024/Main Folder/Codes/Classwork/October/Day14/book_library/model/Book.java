@@ -40,7 +40,9 @@ public class Book {
 
     private boolean countDigit(long isbn) {
         int count  = 0;
-        while(!(isbn / 10 == 0)){
+        long temp = isbn; // переложили isbn в отдельную переменную, чтоб первичное значение осталось неизменным
+        while((temp != 0)){
+            temp = temp / 10;
             count++;
         }//
         // можно циклом for т.к. известно сколько раз он должен отработать
@@ -68,7 +70,7 @@ public class Book {
         return isbn;
     }
 
-    // TODO предусмотреть защиту по поводу 13 цифр и в этом случае
+    // TODO предусмотреть защиту по поводу 13 цифр и в этом случае установить новое значение isbn
     public void setIsbn(long isbn) {
        if(checkIsbn(isbn) > 0) this.isbn = isbn;
        else System.out.println(" ISBN is not correct !");

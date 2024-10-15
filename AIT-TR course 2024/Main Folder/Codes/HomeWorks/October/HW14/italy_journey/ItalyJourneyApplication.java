@@ -49,7 +49,7 @@ public class ItalyJourneyApplication {
         Float[] rentCostArray = new Float[generalArray.length]; // массив содержащий затраты на аренду по каждому авто
 
         //int minCost = bestPriceFinder(generalArray, roadCostArray, rentCostArray, totalCostArray, DIESEL_COST, GASOLINE_COST, RANGE_OF_TRIP, CLEAN_RELAX,  DAY_DRIVING, AVERAGE_SPEED ); // включить для метода bestPriceFinder
-
+        //---------------------------------------------------------------
         int count = 0; // вводим переменные чтоб знать какому элементу принадлежит минимальная стоимость поездки
         Float minCost = 0f;
 

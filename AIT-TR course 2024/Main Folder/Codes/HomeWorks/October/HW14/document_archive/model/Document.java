@@ -25,7 +25,9 @@ public class Document {
 
     private boolean countDigit(int uniqueNumber) {
         int counter = 0;
-        while(uniqueNumber / 10 != 0){
+        int temp = uniqueNumber;
+        while((temp != 0)){
+            temp = temp / 10;
             counter++;
         }//end while
         if(counter == UNIQUENUMBER_LENGHT) return true;

@@ -36,7 +36,7 @@ class ItalyJourneyApplicationTest {
         Float[] roadCostArray = new Float[generalArray.length];
         Float[] rentCostArray = new Float[generalArray.length];
 
-        String actual = ItalyJourneyApplication.bestPriceFinder (arrayTest, roadCostArray,rentCostArray,totalCostArray,2f,2f,1000,5,8f,100f);
+        int actual = ItalyJourney.bestPriceFinder (arrayTest, roadCostArray,rentCostArray,totalCostArray,2f,2f,1000,5,8f,100f);
 
         assertEquals(expected, actual, "Method Failed");
 

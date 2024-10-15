@@ -66,4 +66,27 @@ public class OfferTown {
         if(str.equals("10117") | str.equals("10178") | str.equals("10179")) return true;
         else return false;
     }
+
+    //проверка предложений на предмет соответствия требованиям заказчика
+    // в цикле обращаемся к методам расположенным в супер-классе и дочерних классах
+    public static OfferAppartaments validator (OfferTown [] offerArray){
+        OfferAppartaments temp = null;
+
+        for (int i = 0; i < offerArray.length; i++) {
+            if (offerArray[i] instanceof OfferAppartaments) {
+                if (offerArray[i].checkerOfferTown(offerArray[i])) {
+                    if (((OfferAppartaments) offerArray[i]).checkerOfferHouse(offerArray[i])) {
+                        if (((OfferAppartaments) offerArray[i]).checker1(((OfferAppartaments) offerArray[i]).getLivingArea(), ((OfferAppartaments) offerArray[i]).getNumberOfRooms(), ((OfferAppartaments) offerArray[i]).isBalcony())) {
+                            System.out.println("Perfect offer has founded! -> offer " + (i+1) + " <-"); //если найдено предложение соответствующее всем затребованням условиям,
+                            temp = (OfferAppartaments) offerArray[i];                  // оно записывается в исходное нулевое поле и улетает по email заказчику
+                            System.out.println(temp.toString());
+                        }else System.out.println("Offer " + (i + 1) + " proposed living area, number of rooms or absence of a balcony is unaccetable !");
+                    }else System.out.println("Offer " + (i + 1) + " proposed parking, flor or absence of an elevator is unaccetable !");
+                }else System.out.println("Offer " + (i + 1) + " proposed town or post index is unaccetable !");
+            }else System.out.println("Offer " + (i + 1) + " does not have complete information !");
+        }//end for
+        return temp;
+    }//end validator
+
+
 }//end class

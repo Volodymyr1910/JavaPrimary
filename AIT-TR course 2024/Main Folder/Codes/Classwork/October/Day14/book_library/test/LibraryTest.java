@@ -92,7 +92,19 @@ class LibraryTest {
     void printBookTest() {
         System.out.println("=====================");
         library.printBooks();
-    }
+    }//printBookTest
+
+    @Test
+    void updateBookTest (){
+        Book newBook = new Book("Play Boy", "Super Puper", 1_111_111_111_114l, 2025);
+        library.addBook(newBook);
+        //library.updateBook ();
+
+
+
+    }//end updateBookTest
+
+
 
 
 }//end class

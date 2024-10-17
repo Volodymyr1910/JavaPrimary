@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RegexValidatorTest {
 
-
     //Номер введен только цифрами -> количество цифр должно быть не менее 8 и не более 16
     @Test
     void checkCreditCardNumberTest() {
@@ -18,7 +17,7 @@ class RegexValidatorTest {
         assertFalse(RegexValidator.checkCreditCardNumber("12345"));//цифра имеет менее 8 знаков
 
         assertTrue(RegexValidator.checkCreditCardNumber("0123456789"));//правильный номер
-    }
+    }//end checkCreditCardNumberTest
 
     //Порядок ввода день -> месяц -> год
     //1. Месяц декабрь должен быть введен цифрой 12 или буквами строго (DEC|DE|Dec|De|dec|de) ->  день должен иметь 2 знака -> два знака не могут быть нолями одновременно -> число не может быть более 31
@@ -54,7 +53,6 @@ class RegexValidatorTest {
         assertFalse(RegexValidator.checkDateFormatEU("7.01.1980"));// дней в других месяцах - имеет 1 знак
         assertFalse(RegexValidator.checkDateFormatEU("00.01.1980"));// дней в других месяцах - имеет 2 знака, но они нули
 
-
         assertTrue(RegexValidator.checkDateFormatEU("30.01.1980")); // правильная дата
         assertTrue(RegexValidator.checkDateFormatEU("30.JUNE.1980")); // правильная дата
         assertTrue(RegexValidator.checkDateFormatEU("01_DEC-1980"));// декабрь обозначен буквами + тест разделителей
@@ -62,7 +60,8 @@ class RegexValidatorTest {
         assertTrue(RegexValidator.checkDateFormatEU("28.Feb-1980"));// февраль обозначен буквами + тест разделителей
         assertTrue(RegexValidator.checkDateFormatEU("31-12-1980"));// // декабрь обозначен цифрами + тест разделителей
         assertTrue(RegexValidator.checkDateFormatEU("28_02_1980"));// февраль обозначен цифрами + тест разделителей
-    }
+    }//end checkDateFormatEUTest
+
     //Порядок ввода год -> месяц -> день
     //1. Год введен только цифрами -> должно быть именно 4 цифры -> все цифры не могут быть нулями одновременно ;
     //2. Месяц введен только цифрами -> должно быть именно 2 цифры -> обе цифры не могут быть нулями одновременно ;
@@ -71,40 +70,34 @@ class RegexValidatorTest {
     @Test
     void checkDateFormatUSTest() {
         assertFalse(RegexValidator.checkDateFormatUS("")); //ничего не введено
-        assertFalse(RegexValidator.checkDateFormatUS("30.01.001"));// год имеет менее 4 знаков
-        assertFalse(RegexValidator.checkDateFormatUS("30.01.19805"));// год имеет менее более 4 знаков
-        assertFalse(RegexValidator.checkDateFormatUS("30.01.0000"));// год 0000
+        assertFalse(RegexValidator.checkDateFormatUS("001.01.30"));// год имеет менее 4 знаков
+        assertFalse(RegexValidator.checkDateFormatUS("19805.01.30"));// год имеет менее более 4 знаков
+        assertFalse(RegexValidator.checkDateFormatUS("0000.01.30"));// год 0000
 
-        assertFalse(RegexValidator.checkDateFormatUS("30.KAp.1980"));//  месяц буквами введен в некорректном формате
-        assertFalse(RegexValidator.checkDateFormatUS("30.kAp.1980"));//  месяц буквами введен в некорректном формате
-        assertFalse(RegexValidator.checkDateFormatUS("30.A.1980"));//  месяц имеет только 1 букву
-        assertFalse(RegexValidator.checkDateFormatUS("30.AAAAA.1980"));//  месяц имеет более 3 букв
-        assertFalse(RegexValidator.checkDateFormatUS("30.2.1980"));// месяц цифрами имеет 1 знак
-        assertFalse(RegexValidator.checkDateFormatUS("30.022.1980"));// месяц цифрами имеет более 2 знаков
-        assertFalse(RegexValidator.checkDateFormatUS("30.00.1980"));// месяц цифрами 00
-        assertFalse(RegexValidator.checkDateFormatUS("30.25.1980"));// введен цифрами несуществующий месяц
+        assertFalse(RegexValidator.checkDateFormatUS("1980.KAp.30"));//  месяц буквами введен в некорректном формате
+        assertFalse(RegexValidator.checkDateFormatUS("1980.kAp.30"));//  месяц буквами введен в некорректном формате
+        assertFalse(RegexValidator.checkDateFormatUS("1980.A.30"));//  месяц имеет только 1 букву
+        assertFalse(RegexValidator.checkDateFormatUS("1980.AAAAA.30"));//  месяц имеет более 3 букв
+        assertFalse(RegexValidator.checkDateFormatUS("1980.2.30"));// месяц цифрами имеет 1 знак
+        assertFalse(RegexValidator.checkDateFormatUS("1980.022.30"));// месяц цифрами имеет более 2 знаков
+        assertFalse(RegexValidator.checkDateFormatUS("1980.00.30"));// месяц цифрами 00
+        assertFalse(RegexValidator.checkDateFormatUS("1980.25.30"));// введен цифрами несуществующий месяц
 
-        assertFalse(RegexValidator.checkDateFormatUS("as.11.1980"));// день содержит буквы
-        assertFalse(RegexValidator.checkDateFormatUS("--.Dec.1980"));// день содержит символы
-        assertFalse(RegexValidator.checkDateFormatUS("35.De.1980"));// вееден несуществующий день
-        assertFalse(RegexValidator.checkDateFormatUS("4.De.1980"));// день содержит только 1 знак
-        assertFalse(RegexValidator.checkDateFormatUS("445.DEC.1980"));// день содержит более 2 знаков
-        assertFalse(RegexValidator.checkDateFormatUS("00.FEB.1980"));// день 00
+        assertFalse(RegexValidator.checkDateFormatUS("1980.11.as"));// день содержит буквы
+        assertFalse(RegexValidator.checkDateFormatUS("1980.Dec.--"));// день содержит символы
+        assertFalse(RegexValidator.checkDateFormatUS("1980.De.35"));// вееден несуществующий день
+        assertFalse(RegexValidator.checkDateFormatUS("1980.De.4"));// день содержит только 1 знак
+        assertFalse(RegexValidator.checkDateFormatUS("1980.DEC.445"));// день содержит более 2 знаков
+        assertFalse(RegexValidator.checkDateFormatUS("1980.FEB.00"));// день 00
 
-
-        //assertTrue(RegexValidator.checkDateFormatUS("25.JUNE.1980")); // правильная дата
-        //assertTrue(RegexValidator.checkDateFormatUS("30_JUNE_1980")); // правильная дата + тест разделителей
-        //assertTrue(RegexValidator.checkDateFormatUS("01_DEC.1980"));// декабрь обозначен буквами + тест разделителей
-        //assertTrue(RegexValidator.checkDateFormatUS("28-feb.1980"));// февраль обозначен буквами + тест разделителей
-        //assertTrue(RegexValidator.checkDateFormatUS("28-Feb_1980"));// февраль обозначен буквами + тест разделителей
-        //assertTrue(RegexValidator.checkDateFormatUS("31.12-1980"));// // декабрь обозначен цифрами + тест разделителей
-        assertTrue(RegexValidator.checkDateFormatUS("25.10.1980"));// февраль обозначен цифрами
-
-
-
-
-
-    }
+        assertTrue(RegexValidator.checkDateFormatUS("1980.JUNE.25")); // правильная дата
+        assertTrue(RegexValidator.checkDateFormatUS("2001_JUNE_30")); // правильная дата + тест разделителей
+        assertTrue(RegexValidator.checkDateFormatUS("4026_DEC.01"));// декабрь обозначен буквами + тест разделителей
+        assertTrue(RegexValidator.checkDateFormatUS("0155-feb.28"));// февраль обозначен буквами + тест разделителей
+        assertTrue(RegexValidator.checkDateFormatUS("0289-Feb_28"));// февраль обозначен буквами + тест разделителей
+        assertTrue(RegexValidator.checkDateFormatUS("0027.12-31"));// // декабрь обозначен цифрами + тест разделителей
+        assertTrue(RegexValidator.checkDateFormatUS("9999-12-31"));// февраль обозначен цифрами
+    }//end checkDateFormatUSTest
 
     // начинается с 0 или +49 -> после этого только цифры -> должно быть ровно 11 цифр
     @Test
@@ -119,7 +112,7 @@ class RegexValidatorTest {
         assertTrue(RegexValidator.checkPhoneNumber("016094843005"));//правильный номер 1
         assertTrue(RegexValidator.checkPhoneNumber("+4916094843005"));//правильный номер 2
 
-    }
+    }//end checkPhoneNumberTest
 
     // Номер введен только цифрами -> цифра должно быть одно-, двух-, или трех-значной -> если двух- или трех-значная - то первая цифра не может быть 0 -> итоговая цифра не превышает 255
     @Test
@@ -134,6 +127,5 @@ class RegexValidatorTest {
 
         assertTrue(RegexValidator.checkLessEquals255("0")); //правильный номер
         assertTrue(RegexValidator.checkLessEquals255("200"));//правильный номер
-
-    }
-}
+    }//end checkLessEquals255Test
+}//end class

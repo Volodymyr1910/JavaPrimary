@@ -1,6 +1,7 @@
 package HW2.IbanCode;
 
-import java.util.Arrays;
+import HW2.IbanCode.model.IbanCode;
+
 import java.util.Locale;
 import java.util.Scanner;
 

@@ -20,7 +20,7 @@ public interface Stock_v2 {
     Detail_v2[] findSparePartWithDiscount();
 
     //найти все детали по которым есть дисконтная цена в размере n
-    Detail_v2[] findSparePartWithFixedDiscount(double n);
+    Detail_v2[] findSparePartWithDiscountLowerThan(double n);
 
     //найти все детали идущие комплектом
     Detail_v2[] findSetSparePart();

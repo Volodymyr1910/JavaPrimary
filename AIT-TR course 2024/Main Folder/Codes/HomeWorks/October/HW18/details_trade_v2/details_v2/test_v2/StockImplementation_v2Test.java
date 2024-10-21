@@ -61,27 +61,44 @@ class StockImplementation_v2Test {
 
     @Test
     void findSparePartByVendorTest() {
-    }
+        Detail_v2[] exp = {det[4], det[5]};
+        Detail_v2[] act = stock.findSparePartByVendor("V4");
+        assertArrayEquals(exp,act);
+    }//end findSparePartByVendorTest
 
     @Test
     void findSparePartByMaterialTest() {
-    }
+        Detail_v2[] exp = {det[0], det[3]};
+        Detail_v2[] act = stock.findSparePartByMaterial("M1");
+        assertArrayEquals(exp,act);
+    }//end findSparePartByMaterialTest
 
     @Test
     void findSparePartWithDiscountTest() {
-    }
+        Detail_v2[] exp = {det[1], det[5]};
+        Detail_v2[] act = stock.findSparePartWithDiscount();
+        assertArrayEquals(exp,act);
+    }//end findSparePartWithDiscountTest
 
     @Test
-    void findSparePartWithFixedDiscountTest() {
-    }
+    void findSparePartWithDiscountLowerThanTest() {
+        Detail_v2[] exp = {det[5]};
+        Detail_v2[] act = stock.findSparePartWithDiscountLowerThan(0.85);
+        assertArrayEquals(exp,act);
+    }//end findSparePartWithDiscountLowerThanTest
 
     @Test
     void findSetSparePartTest() {
-    }
+        Detail_v2[] exp = {det[0], det[3]};
+        Detail_v2[] act = stock.findSetSparePart();
+        assertArrayEquals(exp,act);
+    }//end findSetSparePartTest
 
     @Test
     void findCheapestSparePartTest() {
-    }
+        assertEquals(det[4], stock.findCheapestSparePart());
+    }//end findCheapestSparePartTest
+
     //делаю допущение - на заводе поставщика прошла перестандартизация.
     // Деталь Gear c баркодом 100000000000000l, получила новый tooth -> 3 и новый weight -> 0.18. (old tooth = 2; old weight = 0.15;)
     //det[0] = new Gear_v2(100000000000000l, 10,"M1",0.15,"V1",7.5,200, 6.5,2, 3) деталь для замены из конструктора в классе Test
@@ -123,7 +140,6 @@ class StockImplementation_v2Test {
     @Test
     void averageWeightSparePartInStorageTest() {
         assertEquals(0.177547169811320754, stock.averageWeightSparePartInStorage());
-
     }//end averageWeightSparePartInStorageTest()
 
     @Test
@@ -134,16 +150,11 @@ class StockImplementation_v2Test {
     @Test
     void printSparePartTest() {
         stock.printSparePart();
-
     }//end printSparePartTest
 
     @Test
     void quantityOfPiecesOfSparePartsTest (){
         assertEquals(2650, stock.quantityOfPiecesOfSpareParts());
     }//end quantityOfPiecesOfSparePartsTest
-
-
-
-
 
 }//end class

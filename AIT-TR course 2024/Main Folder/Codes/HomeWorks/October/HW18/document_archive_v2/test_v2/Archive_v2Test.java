@@ -121,4 +121,13 @@ class Archive_v2Test {
         assertEquals(thisAutorDocumentsArrayTest[0], fromMethod[0]); //заранее зная что в массиве будет 1 книга этого автора, сравниваем нулевые элементы тест-массива и массива из тестируемого метода
     }//end findAllDocumentsThisAutorTest
 
+    @Test
+    void findAllDocumentsThisYearTest() {
+        Document_v2[] doc = {documents[1],documents[2]};
+        Document_v2[] act = archiveV2.findAllDocumentsThisYear(2000);
+    assertArrayEquals(doc, act);
+
+    }//end findAllDocumentsThisYearTest
+
+
 }//end class

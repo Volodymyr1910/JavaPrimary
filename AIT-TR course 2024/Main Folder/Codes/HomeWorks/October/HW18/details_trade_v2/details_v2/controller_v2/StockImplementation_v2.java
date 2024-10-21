@@ -2,6 +2,10 @@ package HW18.details_trade_v2.details_v2.controller_v2;
 
 import HW18.details_trade_v2.details_v2.dao_v2.Stock_v2;
 import HW18.details_trade_v2.details_v2.model_v2.Detail_v2;
+import HW18.details_trade_v2.details_v2.model_v2.Gear_v2;
+import HW18.details_trade_v2.details_v2.model_v2.Lever_v2;
+
+import java.util.function.Predicate;
 
 public class StockImplementation_v2 implements Stock_v2 {
 
@@ -33,33 +37,55 @@ public class StockImplementation_v2 implements Stock_v2 {
 
     @Override
     public Detail_v2[] findSparePartByVendor(String vendor) {
-        return new Detail_v2[0];
-    }
+        return findDetailByPredicate(details -> details.getVendor().equals(vendor));
+    }//end findSparePartByVendor
 
     @Override
     public Detail_v2[] findSparePartByMaterial(String material) {
-        return new Detail_v2[0];
-    }
+        return findDetailByPredicate(details -> details.getMaterial().equals(material));
+    }//end findSparePartByMaterial
 
     @Override
     public Detail_v2[] findSparePartWithDiscount() {
-        return new Detail_v2[0];
-    }
+        return findDetailByPredicate(details -> details instanceof Lever_v2);
+    }//end findSparePartWithDiscount
 
     @Override
-    public Detail_v2[] findSparePartWithFixedDiscount(double n) {
-        return new Detail_v2[0];
-    }
+    public Detail_v2[] findSparePartWithDiscountLowerThan(double n) {
+        // return findDetailByPredicate(details -> details instanceof Lever_v2 && (Lever_v2) details[i].getdiscountCost <= n);
+       int count = 0;
+        for (int i = 0; i < size; i++) {
+            if(details[i] instanceof Lever_v2){
+                if(((Lever_v2) details[i]).getDiscountCost() <= n) {
+                    count++;
+                }//end if
+            }//end if
+        }//end fori
+        Detail_v2 [] detailsWithDLowerN = new Detail_v2[count];
+        for (int i = 0, j = 0; i < size; i++) {
+            if(details[i] instanceof Lever_v2){
+                if(((Lever_v2) details[i]).getDiscountCost() <= n) {
+                    detailsWithDLowerN[j] = details[i];
+                    j++;
+                }//end if
+            }//end if
+        }//end fori
+        return detailsWithDLowerN;
+    }//end findSparePartWithDiscountLowerThan
 
     @Override
     public Detail_v2[] findSetSparePart() {
-        return new Detail_v2[0];
-    }
+        return findDetailByPredicate(details -> details instanceof Gear_v2);
+    }//end findSetSparePart
 
     @Override
     public Detail_v2 findCheapestSparePart() {
-        return null;
-    }
+        Detail_v2 cheapestDetail = details [0];
+        for (int i = 0; i < size; i++) {
+            if(details[i].getSparePartCost() < cheapestDetail.getSparePartCost()) cheapestDetail = details[i];
+        }//end for
+        return cheapestDetail;
+    }//end findCheapestSparePart
 
     //делаю допущение - на заводе поставщика прошла перестандартизация.
     // Деталь Gear c баркодом 100000000000000l, получила новый tooth -> 3 и новый weight -> 0.18. (old tooth = 2; old weight = 0.15;)
@@ -126,4 +152,34 @@ public class StockImplementation_v2 implements Stock_v2 {
             System.out.println(details[i]);
         }//end for
     }//end sprintSparePart
-}//end StockImplementation
+
+    private Detail_v2 [] findDetailByPredicate (Predicate <Detail_v2> pred){
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if(pred.test(details[i]))count++;
+        }//end for
+        Detail_v2 [] res = new Detail_v2[count];
+        for (int i = 0, j = 0; j < res.length; i++) {
+            if(pred.test(details[i])){
+                res[j++] = details[i];
+            }//end if
+        }//end fori
+        return res;
+    }//end findDetailByPredicate
+
+
+    // как учесть в аргументах predicate 2 условия я не разобрался
+    private Detail_v2 findDetailByPredicateWithCondition (Predicate<Boolean> pred){
+        double minCost = details[0].getSparePartCost();
+        Detail_v2 cheapestDetail = null;
+        for (int i = 0; i < size; i++) {
+                if(pred.test(details[i].getSparePartCost() < minCost)){
+                    minCost = details[i].getSparePartCost();
+                    cheapestDetail = details [i];
+                }//end if
+        }//end for
+        return cheapestDetail;
+    }//end findDetailByPredicate
+
+
+}//end class

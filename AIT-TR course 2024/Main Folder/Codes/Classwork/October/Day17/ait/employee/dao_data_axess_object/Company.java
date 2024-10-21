@@ -20,8 +20,11 @@ public interface Company {
 
     double totalSales(); // метод будет брать поле которое есть не у всех Employee !!!
 
+    double averageSalary();
+
     Employee [] findEmployeeHoursGratedThan (int hours); // ищет сотрудников которые проработали hours часов
 
     Employee [] findEmployeeSalaryRange(double min, double max); // ищет сотрудников у которых зп в диапазоне от min до max
+
 
 }//end interface

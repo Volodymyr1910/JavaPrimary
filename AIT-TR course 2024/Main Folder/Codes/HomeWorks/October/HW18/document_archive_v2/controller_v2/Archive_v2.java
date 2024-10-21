@@ -3,6 +3,8 @@ package HW18.document_archive_v2.controller_v2;
 import HW18.document_archive_v2.dao_v2.Archivarius_v2;
 import HW18.document_archive_v2.model_v2.Document_v2;
 
+import java.util.function.Predicate;
+
 public class Archive_v2 implements Archivarius_v2 {
 
     private Document_v2[] documents;
@@ -92,6 +94,11 @@ public class Archive_v2 implements Archivarius_v2 {
     }//end findAllDocumentsThisAutor
 
     @Override
+    public Document_v2[] findAllDocumentsThisYear(int year) {
+        return findDocumentWithPredicate(documents -> documents.getYearOfPublishing() == year);
+    }//end findAllDocumentsThisAutor
+
+    @Override
     public Document_v2[] findTheOldestDocuments() {
         //находим самый старый год документов
         Document_v2 oldDocument = documents [0];
@@ -102,10 +109,9 @@ public class Archive_v2 implements Archivarius_v2 {
             }//end if
         }//end for
         //считаем сколько документов с самым старым годом
-       int oldestYear = 0;
+       int oldestYear = oldDocument.getYearOfPublishing();
         for (int i = 0; i < size ; i++) {
-            if(documents[i].getYearOfPublishing() == oldDocument.getYearOfPublishing()){
-                oldestYear = documents[i].getYearOfPublishing();
+            if(documents[i].getYearOfPublishing() == oldestYear){
                 count++;
             }//end if
         }//end for
@@ -119,4 +125,24 @@ public class Archive_v2 implements Archivarius_v2 {
         }//end fori
         return oldestDocumentsArray;
     }//end findTheOldestDocuments
+
+    private Document_v2 [] findDocumentWithPredicate (Predicate <Document_v2> pred) {
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (pred.test(documents[i])) count++;
+        }//end for
+        Document_v2 [] arrayPredicate = new Document_v2[count];
+        for (int i = 0, j = 0; j < arrayPredicate.length; i++) {
+            if (pred.test(documents[i])){
+               arrayPredicate [j] = documents[i];
+                j++;
+            }//end if
+        }//end for
+        return arrayPredicate;
+    }//end findDocumentWithPredicate
+
+
+
+
+
 }//end class

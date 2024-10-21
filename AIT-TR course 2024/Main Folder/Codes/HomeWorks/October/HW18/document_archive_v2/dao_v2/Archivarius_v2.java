@@ -10,6 +10,8 @@ public interface Archivarius_v2 {
     //найти все документы этого автора
      Document_v2[] findAllDocumentsThisAutor (String autor);
 
+     Document_v2[] findAllDocumentsThisYear(int year);
+
     //найти самые старые по году документы в архиве
     Document_v2[] findTheOldestDocuments ();
 

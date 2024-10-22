@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class DomesticAnimals extends Animal{
 
-    private int friendlyLevel; // from 1 to 10 -> 10 is completely friendly; 1 -> is neutral
+    protected int friendlyLevel; // from 1 to 10 -> 10 is completely friendly; 1 -> is neutral
 
     public DomesticAnimals(int id, double height, double weight, double age, boolean health, double trainingHourCost, int trainingHours, int friendlyLevel) {
         super(id, height, weight, age, health, trainingHourCost, trainingHours);

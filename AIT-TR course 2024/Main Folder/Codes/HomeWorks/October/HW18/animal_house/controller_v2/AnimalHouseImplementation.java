@@ -9,7 +9,7 @@ import HW18.document_archive_v2.model_v2.Document_v2;
 public class AnimalHouseImplementation implements AnimalHouse_v2 {
 
     private Animal [] animals;
-    int size;
+    private int size;
 
     public AnimalHouseImplementation(int capasity) {
         this.animals = new Animal [capasity];

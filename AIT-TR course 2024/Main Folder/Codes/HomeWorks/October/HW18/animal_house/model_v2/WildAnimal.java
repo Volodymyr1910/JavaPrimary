@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class WildAnimal extends Animal {
 
-    private boolean predator;
+    protected boolean predator;
 
 
     public WildAnimal(int id, double height, double weight, double age, boolean health, double trainingHourCost, int trainingHours, boolean predator) {

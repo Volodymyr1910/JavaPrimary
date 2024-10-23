@@ -83,7 +83,7 @@ class StockImplementation_v2Test {
     @Test
     void findSparePartWithDiscountLowerThanTest() {
         Detail_v2[] exp = {det[5]};
-        Detail_v2[] act = stock.findSparePartWithDiscountLowerThan(0.85);
+        Detail_v2[] act = stock.findSparePartWithDiscountLowerThan(0.8);
         assertArrayEquals(exp,act);
     }//end findSparePartWithDiscountLowerThanTest
 

@@ -52,15 +52,11 @@ public class StockImplementation_v2 implements Stock_v2 {
 
     @Override
     public Detail_v2[] findSparePartWithDiscountLowerThan(double n) {
+        // способ с помощью Predicate
+        return findDetailByPredicate(details -> details instanceof Lever_v2 && ((Lever_v2) details).getDiscountCost() <= n);
 
-        /*for (int i = 0; i < size; i++) {
-            if (details[i] instanceof Lever_v2) {
-                findDetailByPredicate(details -> details instanceof Lever_v2 && (Lever_v2) details[i].getdiscountCost <= n)
-            }
-        }
-        return findDetailByPredicate(details -> details instanceof Lever_v2 && (Lever_v2) details[i].getdiscountCost <= n); */
-
-        int count = 0;
+        //классический способ
+        /*int count = 0;
         for (int i = 0; i < size; i++) {
             if(details[i] instanceof Lever_v2){
                 if(((Lever_v2) details[i]).getDiscountCost() <= n) {
@@ -77,7 +73,8 @@ public class StockImplementation_v2 implements Stock_v2 {
                 }//end if
             }//end if
         }//end fori
-        return detailsWithDLowerN;
+        return detailsWithDLowerN; */
+
     }//end findSparePartWithDiscountLowerThan
 
     @Override
@@ -173,20 +170,5 @@ public class StockImplementation_v2 implements Stock_v2 {
         }//end fori
         return res;
     }//end findDetailByPredicate
-
-
-    // как учесть в аргументах predicate 2 условия я не разобрался
-    private Detail_v2 findDetailByPredicateWithCondition (Predicate<Boolean> pred){
-        double minCost = details[0].getSparePartCost();
-        Detail_v2 cheapestDetail = null;
-        for (int i = 0; i < size; i++) {
-                if(pred.test(details[i].getSparePartCost() < minCost)){
-                    minCost = details[i].getSparePartCost();
-                    cheapestDetail = details [i];
-                }//end if
-        }//end for
-        return cheapestDetail;
-    }//end findDetailByPredicate
-
 
 }//end class

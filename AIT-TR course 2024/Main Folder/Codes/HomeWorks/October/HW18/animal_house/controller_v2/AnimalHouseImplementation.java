@@ -6,6 +6,8 @@ import HW18.animal_house.model_v2.WildAnimal;
 import HW18.details_trade_v2.details_v2.model_v2.Detail_v2;
 import HW18.document_archive_v2.model_v2.Document_v2;
 
+import java.util.Comparator;
+
 public class AnimalHouseImplementation implements AnimalHouse_v2 {
 
     private Animal [] animals;

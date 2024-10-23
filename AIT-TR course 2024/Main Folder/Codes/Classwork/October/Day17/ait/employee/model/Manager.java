@@ -29,6 +29,20 @@ public class Manager extends Employee {
     }
 
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Manager{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", secondName='").append(secondName).append('\'');
+        sb.append(", hours=").append(hours);
+        sb.append(", salary=").append(calcSalary());
+        sb.append(", baseSalary=").append(baseSalary);
+        sb.append(", grade=").append(grade);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public double calcSalary() {
         double salary = baseSalary + hours * grade;
         return ensureSalary(salary); // проверяем чтоб зп не была меньше минимальной возможной по часам

@@ -9,14 +9,14 @@ public class ArrayMethods {
     //finding element, that's different from others; USEFULL when array have many equal elements
     //знаходить елемент який більше або менше інших елементів
     //якщо таких елементів не один - то повертає індекс першого знайденого зліва
-    public static int findIndexOfAnotherElement (int  array []) {
+    public static int findIndexOfAnotherElement(int array[]) {
         int hereYouAre = 0;
         for (int i = 0; i < array.length; i++) {
             if (i > 0) {
                 if (array[i] < array[i - 1]) {
-                    hereYouAre = i-1;
-                    i = array.length-1;
-                }else{
+                    hereYouAre = i - 1;
+                    i = array.length - 1;
+                } else {
                     hereYouAre = i;
                 }//end else
             }//end if
@@ -24,10 +24,33 @@ public class ArrayMethods {
         return hereYouAre;
     }// end findIndexOfAnotherElement
 
+    //переносить d новий масив всі парні елементи, а потім всі непарні. *** число 0 відкидається ***
+    //заповнює новий масив зліва на право
+    //розмір нового масиву  =  розміру масиву-донора мінус кількість нулів
+    public static int[] tranferToNewArrayEvenThanOddAutoSize(int[] array) {
+        int size = 0;
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == 0) count++;
+        }//end for
+        int[] temp = new int[array.length - count]; // размер массива будет равен размеру изначального массива
+        for (int i = 0, j = 0; i < array.length; i++) {
+            if ((array[i] % 2 == 0) & (array[i] > 0)) {
+                temp[size++] = array[i];
+            }//end if
+        }//end for
+        for (int i = 0; i < array.length; i++) {
+            if ((array[i] % 2 > 0) & (array[i] > 0)) {
+                temp[size++] = array[i];
+            }//end if
+        }//end for
+        return temp;
+    }//end tranferToNewArrayEvenThanOddAutoSize
+
     //переносить всі не парні елементи одного масиву в інший *** число 0 відкидається ***
     //заповнює новий масив зліва на право
     //розмір нового масиву  =  кількості не парних елементів масиву-донора
-    public static int[] tranferToNewArrayOnlyOddAutoSize (int[] array) {
+    public static int[] tranferToNewArrayOnlyOddAutoSize(int[] array) {
         int[] temp = new int[howMuchOddNumbersInArray(array)];
         for (int i = 0, j = 0; i < array.length; i++) {
             if ((array[i] % 2 > 0) & (array[i] > 0)) {
@@ -41,7 +64,7 @@ public class ArrayMethods {
     //переносить всі парні елементи одного масиву в інший *** число 0 відкидається ***
     //заповнює новий масив зліва на право
     //розмір нового масиву  =  кількості парних елементів масиву-донора
-    public static int[] tranferToNewArrayOnlyEvenAutoSize (int[] array) {
+    public static int[] tranferToNewArrayOnlyEvenAutoSize(int[] array) {
         int[] temp = new int[howMuchEvenNumbersInArray(array)];
         for (int i = 0, j = 0; i < array.length; i++) {
             if ((array[i] % 2 == 0) & (array[i] > 0)) {
@@ -55,7 +78,7 @@ public class ArrayMethods {
     //Копіює всі позитивні елементи (ті, що більші за нуль) одного масиву і заносить їх в інший
     //індекси скопійованих елементів нового массиву такі самі як індекси цих елементів в старому масиві
     //розмір нового масиву має бути більший за розмір масиву-донора, або такий самий
-    public static int[] copyToAnotherArrayOnlyPositive (int[] array, int newArrayLenght) {
+    public static int[] copyToAnotherArrayOnlyPositive(int[] array, int newArrayLenght) {
         if (newArrayLenght < array.length) {
             newArrayLenght = array.length;
         }//end if
@@ -71,7 +94,7 @@ public class ArrayMethods {
     //переносить всі позитивні елементи (ті, що більші за нуль) одного масиву і заносить їх в інший
     //заповнює новий масив зліва на право
     //розмір нового масиву  =  кількості позитивних елементів масиву-донора
-    public static int[] tranferToNewArrayOnlyPositiveAutoSize (int[] array) {
+    public static int[] tranferToNewArrayOnlyPositiveAutoSize(int[] array) {
         int[] temp = new int[howMuchPositiveNumbersInArray(array)];
         for (int i = 0, j = 0; i < array.length; i++) {
             if (array[i] > 0) {
@@ -83,10 +106,10 @@ public class ArrayMethods {
     }// end tranferToNewArrayOnlyPositiveAutoSize
 
     // рахує скільки в масиві простих чисел (просте число - число, більше за одиницю, яке ділиться без остачі тільки на 1 і самого себе)
-    public static int howMuchPrimeNumbersInArray (int [] array){
+    public static int howMuchPrimeNumbersInArray(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
-            if ((array[i] > 1)  && (IntMethods.isPrimeNumber(array[i]))) {
+            if ((array[i] > 1) && (IntMethods.isPrimeNumber(array[i]))) {
                 count++;
             }//end if
         }//end for
@@ -94,7 +117,7 @@ public class ArrayMethods {
     }//end howMuchPrimeNumbersInArray
 
     // рахує скільки в масиві не парних елементів *** число 0 відкидається ***
-    public static int howMuchOddNumbersInArray (int[] array) {
+    public static int howMuchOddNumbersInArray(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if ((array[i] % 2 > 0) & (array[i] > 0)) {
@@ -105,7 +128,7 @@ public class ArrayMethods {
     }//end  howMuchOddNumbersInArray
 
     // рахує скільки в масиві парних елементів *** число 0 відкидається ***
-    public static int howMuchEvenNumbersInArray (int[] array) {
+    public static int howMuchEvenNumbersInArray(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if ((array[i] % 2 == 0) & (array[i] > 0)) {
@@ -116,7 +139,7 @@ public class ArrayMethods {
     }//end  howMuchEvenNumbersInArray
 
     // рахує скільки в масиві негативних елементів
-    public static int howMuchNegativeNumbersInArray (int[] array) {
+    public static int howMuchNegativeNumbersInArray(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] < 0) {
@@ -127,7 +150,7 @@ public class ArrayMethods {
     }//end  howMuchNegativeNumbersInArray
 
     // рахує скільки в масиві позитивних елементів
-    public static int howMuchPositiveNumbersInArray (int[] array) {
+    public static int howMuchPositiveNumbersInArray(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > 0) {
@@ -138,7 +161,7 @@ public class ArrayMethods {
     }//end  howMuchPositiveNumbersInArray
 
     // рахує скільки в масиві нулів
-    public static int howMuchZeroInArray (int[] array) {
+    public static int howMuchZeroInArray(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == 0) {
@@ -150,7 +173,7 @@ public class ArrayMethods {
 
     //binary search works only with sortirated arrays from high to small
     //O(log(n))  returns index of founded element (if element absent - return "-1")
-    public static int binarySearchFromHighToSmall (int[] array, int n) {
+    public static int binarySearchFromHighToSmall(int[] array, int n) {
         int leftIndex = 0;
         int rightIndex = array.length - 1;
 
@@ -171,7 +194,7 @@ public class ArrayMethods {
 
     //binary search works only with sortirated arrays from low to big
     //O(log(n))  returns index of founded element (if element absent - return "-1")
-    public static int binarySearchFromLowToBig (int[] array, int n) {
+    public static int binarySearchFromLowToBig(int[] array, int n) {
         int leftIndex = 0;
         int rightIndex = array.length - 1;
         while (leftIndex <= rightIndex) {
@@ -192,8 +215,8 @@ public class ArrayMethods {
     //O(n) - чем больше размер массива - тем дольше работает метод, т.к. перебирает каждое значение
     //возвращает индекс первого попавшегося в массиве искомого елемента (ИЩЕТ СПРАВА НАЛЕВО)
     //linear search, returns index of founded element (if element absent - return "-1")
-    public static int linearSearchFromEndToStart (int[] array, int n) {
-        for (int i = array.length-1; i >= 0; i--) {
+    public static int linearSearchFromEndToStart(int[] array, int n) {
+        for (int i = array.length - 1; i >= 0; i--) {
             if (array[i] == n) {
                 return i; // at this moment we go out from the method
             }//end if
@@ -204,7 +227,7 @@ public class ArrayMethods {
     //O(n) - чем больше размер массива - тем дольше работает метод, т.к. перебирает каждое значение
     //возвращает индекс первого попавшегося в массиве искомого елемента (ИЩЕТ СЛЕВА НАПРАВО)
     //linear search, returns index of founded element (if element absent - return "-1")
-    public static int linearSearchFromStartToEnd (int[] array, int n) {
+    public static int linearSearchFromStartToEnd(int[] array, int n) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == n) {
                 return i; // at this moment we go out from the method
@@ -214,7 +237,7 @@ public class ArrayMethods {
     }//end linearSearchFromStartToEnd
 
     //finding min element in array
-    public static int MinElementInAray (int [] array) {
+    public static int MinElementInAray(int[] array) {
         int min = array[0];
         for (int i = 0; i < array.length; i++) {
             if (array[i] < min) {
@@ -225,7 +248,7 @@ public class ArrayMethods {
     }//MinElementInAray
 
     //finding max element in array
-    public static int MaxElementInAray (int [] array) {
+    public static int MaxElementInAray(int[] array) {
         int max = array[0];
         for (int i = 0; i < array.length; i++) {
             if (array[i] > max) {
@@ -239,21 +262,21 @@ public class ArrayMethods {
     // метод находит индекс, на котором искомое число встречается пятый раз
     // если повторений в массиве искомого числа менее 5, то метод вернет последний индекс, где было найдено искомое число
     // если искомого числа нет, вернет -1
-    public static int returnFifthIndexOfRepeatedElement (int[] array, int n) {
+    public static int returnFifthIndexOfRepeatedElement(int[] array, int n) {
         int fifthIndex = -1;
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == n) {
                 fifthIndex = i;
                 count++;
-                if (count == 5) i = array.length-1;
+                if (count == 5) i = array.length - 1;
             }//end if
         }//end for
         return fifthIndex;
     }//returnFifthIndexOfRepeatedElement
 
     // giving back number from array, which stay in array under selected index
-    public static int returnNumberfromArrayUnderSelectedIndex (int[] array, int n) {
+    public static int returnNumberfromArrayUnderSelectedIndex(int[] array, int n) {
         int temp = 0;
         for (int i = 0; i < array.length; i++) {
             if (i == n) {
@@ -264,7 +287,7 @@ public class ArrayMethods {
     }//end returnNumberfromArrayUnderSelectedIndex
 
     //finding index of min element in array
-    public static int indexOfMinElementInAray (int [] array) {
+    public static int indexOfMinElementInAray(int[] array) {
         int min = array[0];
         int indexOfMin = 0;
         for (int i = 0; i < array.length; i++) {
@@ -277,7 +300,7 @@ public class ArrayMethods {
     }//indexOfMinElementInAray
 
     //finding index of max element in array
-    public static int indexOfMaxElementInAray (int [] array) {
+    public static int indexOfMaxElementInAray(int[] array) {
         int max = array[0];
         int indexOfMax = 0;
         for (int i = 0; i < array.length; i++) {
@@ -290,7 +313,7 @@ public class ArrayMethods {
     }//indexOfMaxElementInAray
 
     // считает сколько искомых элементов есть в массиве
-    public static int howMuchTimesFindElement (int[] array, int n) {
+    public static int howMuchTimesFindElement(int[] array, int n) {
         int times = 0;
         int indexOfMax = 0;
         for (int i = 0; i < array.length; i++) {
@@ -302,7 +325,7 @@ public class ArrayMethods {
     }//end howMuchTimesFindElement
 
     //повертає true якщо в масиві є шукоме число
-    public static boolean searchInArrayBoolean (int[] array, int n) {
+    public static boolean searchInArrayBoolean(int[] array, int n) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == n) {
                 return true;
@@ -314,17 +337,17 @@ public class ArrayMethods {
 //// ------------------------------------- Sorting array ----------------------------------------------------
 
     //selection sort
-    public static void selectionSort ( int array []){
+    public static void selectionSort(int array[]) {
         for (int i = 0; i < array.length; i++) {
             int minElement = array[i];
             int count = 0;
             for (int j = i + 1; j < array.length; j++) {
-                if (array[j] < minElement){
+                if (array[j] < minElement) {
                     minElement = array[j];
                     count = j;
                 }//end if
             }//for
-            if(minElement < array[i]) {
+            if (minElement < array[i]) {
                 int temp = array[i];
                 array[i] = minElement;
                 array[count] = temp;
@@ -334,7 +357,7 @@ public class ArrayMethods {
 
     //bublesort сортирует по убыванию и ВОЗВРАЩАЕТ МАССИВ
     //- упорядоченные элементы выключаются из цикла
-    public static int[] bubleSortFromHighToSmallWithReturn (int[] array) {
+    public static int[] bubleSortFromHighToSmallWithReturn(int[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] < array[j + 1]) { //compare two ellements of array, if left > right -> swap (меняем местами)
@@ -351,7 +374,7 @@ public class ArrayMethods {
     //- сравниваем всегда 2 соседних элемента, переставляем их местами, если они расположены не в порядке возрастания
     //- цикл должен идти слева направо
     //- упорядоченные элементы выключаются из цикла
-    public static int[] bubleSortFromLowToBigWithReturn (int[] array) {
+    public static int[] bubleSortFromLowToBigWithReturn(int[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] > array[j + 1]) { //compare two ellements of array, if left > right -> swap (меняем местами)
@@ -366,7 +389,7 @@ public class ArrayMethods {
 
     //bublesort сортирует по убыванию
     //- упорядоченные элементы выключаются из цикла
-    public static void bubleSortFromHighToSmall (int[] array) {
+    public static void bubleSortFromHighToSmall(int[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] < array[j + 1]) { //compare two ellements of array, if left > right -> swap (меняем местами)
@@ -382,7 +405,7 @@ public class ArrayMethods {
     //- сравниваем всегда 2 соседних элемента, переставляем их местами, если они расположены не в порядке возрастания
     //- цикл должен идти слева направо
     //- упорядоченные элементы выключаются из цикла
-    public static void bubleSortFromLowToBig (int[] array) {
+    public static void bubleSortFromLowToBig(int[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] > array[j + 1]) { //compare two ellements of array, if left > right -> swap (меняем местами)
@@ -398,9 +421,9 @@ public class ArrayMethods {
 
     // make copy elements from one INT ARRAY to another DOUBLE ARRAY
     // розмір нового масиву такий самий як розмір масиву-донора
-    public static double[] copyArrayWithChangeIntToDoubleAutoSize (int[] arrayFrom) {
+    public static double[] copyArrayWithChangeIntToDoubleAutoSize(int[] arrayFrom) {
         int u = 0;
-        double arrayTo [] = new double[arrayFrom.length];
+        double arrayTo[] = new double[arrayFrom.length];
         for (int i = 0; i < arrayFrom.length; i++) {
             arrayTo[u] = arrayFrom[i];
             u++;
@@ -413,7 +436,7 @@ public class ArrayMethods {
     // метод що розвертає дані в масиві навпаки int[1,2,3] -> int[3,2,1]
     // если размер arrayFrom больше - будет error
     //если размер arrayTo больше -  в нем останутся пустые ячейки или ячейки с его "родными" елементами
-    public static int[] transferFromOneArrayToAnotherWithTurnAround (int[] arrayFrom, int[] arrayTo) {
+    public static int[] transferFromOneArrayToAnotherWithTurnAround(int[] arrayFrom, int[] arrayTo) {
         int u = 0;
         for (int t = arrayFrom.length - 1; t >= 0; t--) {
             arrayTo[u] = arrayFrom[t];
@@ -425,7 +448,7 @@ public class ArrayMethods {
 
     //reverseArray
     //step 2 of 2 reverse array
-    public static void reverseArray (int[] array) {
+    public static void reverseArray(int[] array) {
         for (int i = 0, j = array.length - 1; i < j; i++, j--) {
             swap(array, i, j);
         }//end for
@@ -439,7 +462,7 @@ public class ArrayMethods {
     }//end swap
 
     // копіює масив з можливістю вибрати довжину нового масиву
-    public static int[] copyOfArray (int[] array, int newLenght) {
+    public static int[] copyOfArray(int[] array, int newLenght) {
         int[] newArray = new int[newLenght];
         int u = 0;
         for (int i = 0; i < array.length; i++) {
@@ -452,15 +475,13 @@ public class ArrayMethods {
 //// ------------------------------------- Other operations with array  -------------------------------------
 
 
-
-
 //// ------------------------------------- Total and Average of array  --------------------------------------
 
     // возвращает сумму всех элементов массива, которые имеют четные индексы
-    public static int sumArrayElementsWithEvenIndexes (int[] array) {
+    public static int sumArrayElementsWithEvenIndexes(int[] array) {
         int res = 0;
         for (int i = 0; i < array.length; i++) {
-            if(i % 2 == 0) {
+            if (i % 2 == 0) {
                 res += array[i];
             }//end if
         }//end for
@@ -468,10 +489,10 @@ public class ArrayMethods {
     }//sumArrayElementsWithEvenIndexes
 
     // возвращает сумму всех элементов массива, которые имеют нечетные индексы
-    public static int sumArrayElementsWithOddIndexes (int[] array) {
+    public static int sumArrayElementsWithOddIndexes(int[] array) {
         int res = 0;
         for (int i = 0; i < array.length; i++) {
-            if(i % 2 > 0) {
+            if (i % 2 > 0) {
                 res += array[i];
             }//end if
         }//end for
@@ -479,7 +500,7 @@ public class ArrayMethods {
     }//sumArrayElementsWithOddIndexes
 
     // возвращает сумму всех элементов массива
-    public static int sumArray (int[] array) {
+    public static int sumArray(int[] array) {
         int res = 0;
         for (int i = 0; i < array.length; i++) {
             res = res + array[i];
@@ -490,7 +511,7 @@ public class ArrayMethods {
 //// ------------------------------------- Print array ------------------------------------------------------
 
     //печатает массив
-    public static void printArray (int[] array) {
+    public static void printArray(int[] array) {
         int n = 0;
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i]);
@@ -508,7 +529,7 @@ public class ArrayMethods {
     //fill array numbers in range from a to b, ARRAY is GROWING and ARRAY EVEN a
     // a - left border, b - right border, n - automaticaly max (make it as big, as it can be)
     // a must be > 0; if a = b -> array will have only one element
-    public static int[] fillGrowingArrayFromAtoBAutoSize (int a, int b) {
+    public static int[] fillGrowingArrayFromAtoBAutoSize(int a, int b) {
         int n = b / a;
         int[] array = new int[n];
         array[0] = a;
@@ -522,7 +543,7 @@ public class ArrayMethods {
     //fill array numbers in range from a with election step ARRAY is GROWING
     // a - left border, n - quantity (array size), step - difference between i and i+1
     // if a = step -> all array elements will be even to step
-    public static int[] fillGrowingArrayFromAwithElectionStep (int a, int n, int step) {
+    public static int[] fillGrowingArrayFromAwithElectionStep(int a, int n, int step) {
         int[] array = new int[n];
         array[0] = a;
         for (int i = 1; i < array.length; i++) {
@@ -533,7 +554,7 @@ public class ArrayMethods {
 
     //fill array, where all ellement are equal
     // n - quantity (array size), element - all numbers in array
-    public static int[] fillArrayAllElementsAreEqual (int n, int step) {
+    public static int[] fillArrayAllElementsAreEqual(int n, int step) {
         int[] array = new int[n];
         for (int i = 0; i < array.length; i++) {
             array[i] = array[i] + step;
@@ -544,7 +565,7 @@ public class ArrayMethods {
     //fill array random numbers without repetitions
     // a - left border, b - right border, n - quantity (array size)
     // number n can't be higher than right border
-    public static int[] fillArrayRandomWithoutRepetitions (int a, int b, int n) {
+    public static int[] fillArrayRandomWithoutRepetitions(int a, int b, int n) {
         int array[] = new int[n];
         for (int i = 0; i < array.length; i++) {
             int temp = (int) (Math.random() * (b - a + 1) + a);
@@ -561,7 +582,7 @@ public class ArrayMethods {
 
     //fill array random numbers
     // a - left border, b - right border, n - quantity (array size)
-    public static int[] fillArrayRandom (int a, int b, int n) {
+    public static int[] fillArrayRandom(int a, int b, int n) {
         int[] array = new int[n];
         for (int i = 0; i < array.length; i++) {
             array[i] = (int) (Math.random() * (b - a + 1) + a);

@@ -26,5 +26,6 @@ public interface Company {
 
     Employee [] findEmployeeSalaryRange(double min, double max); // ищет сотрудников у которых зп в диапазоне от min до max
 
+    Employee [] findEmployeeSalesRange(double min, double max); // ищет сотрудников у которых зп в диапазоне от min до max
 
 }//end interface

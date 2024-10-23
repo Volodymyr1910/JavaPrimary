@@ -1,6 +1,7 @@
 package Day21.ait.cars.dao;
 
 import Day21.ait.cars.model.Car;
+import HW18.details_trade_v2.details_v2.model_v2.Detail_v2;
 
 import java.util.function.Predicate;
 
@@ -26,8 +27,16 @@ public class GarageImplementation implements Garage {
 
     @Override
     public Car removeCar(String regNumber) {
+        for (int i = 0; i < size; i++) {
+            if (cars[i].getRegNumber().equals(regNumber)) {
+                Car victim = cars[i];
+                cars[i] = cars[size - 1];
+                size--;
+                return victim;
+            }//end if
+        }//end fori
         return null;
-    }
+    }//end removeCar
 
     @Override
     public Car findCarByRegNumber(String regNumber) {
@@ -51,13 +60,13 @@ public class GarageImplementation implements Garage {
 
     @Override
     public Car[] findCarsByEngine(double min, double max) {
-        return new Car[0];
-    }
+        return findCarsByPredicate(c -> c.getEngine() > min && c.getEngine() < max);
+    }//end findCarsByEngine
 
     @Override
-    public Car[] findCarsByColor(String regNumber) {
-        return new Car[0];
-    }
+    public Car[] findCarsByColor(String color) {
+        return findCarsByPredicate(car -> car.getColor().equals(color));
+    }//end findCarsByColor
 
     @Override
     public int size() {

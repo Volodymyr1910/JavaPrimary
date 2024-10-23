@@ -52,8 +52,15 @@ public class StockImplementation_v2 implements Stock_v2 {
 
     @Override
     public Detail_v2[] findSparePartWithDiscountLowerThan(double n) {
-        // return findDetailByPredicate(details -> details instanceof Lever_v2 && (Lever_v2) details[i].getdiscountCost <= n);
-       int count = 0;
+
+        /*for (int i = 0; i < size; i++) {
+            if (details[i] instanceof Lever_v2) {
+                findDetailByPredicate(details -> details instanceof Lever_v2 && (Lever_v2) details[i].getdiscountCost <= n)
+            }
+        }
+        return findDetailByPredicate(details -> details instanceof Lever_v2 && (Lever_v2) details[i].getdiscountCost <= n); */
+
+        int count = 0;
         for (int i = 0; i < size; i++) {
             if(details[i] instanceof Lever_v2){
                 if(((Lever_v2) details[i]).getDiscountCost() <= n) {

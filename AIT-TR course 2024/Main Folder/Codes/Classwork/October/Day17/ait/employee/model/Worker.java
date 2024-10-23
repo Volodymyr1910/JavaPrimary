@@ -20,6 +20,19 @@ private int grade;
     }
 
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Worker{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", secondName='").append(secondName).append('\'');
+        sb.append(", hours=").append(hours);
+        sb.append(", salary=").append(calcSalary());
+        sb.append(", grade=").append(grade);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public double calcSalary() {
         double salary = hours * grade;
         return ensureSalary(salary);

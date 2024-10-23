@@ -10,7 +10,7 @@ public interface Garage {
     Car [] findCarsByModel (String model);
     Car [] findCarsByCompany (String company);
     Car [] findCarsByEngine (double min, double max);
-    Car [] findCarsByColor (String regNumber);
+    Car [] findCarsByColor (String color);
     int size();
     void printCars ();
 

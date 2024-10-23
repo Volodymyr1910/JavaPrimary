@@ -3,6 +3,8 @@ package Day21.ait.cars.test;
 import Day21.ait.cars.dao.Garage;
 import Day21.ait.cars.dao.GarageImplementation;
 import Day21.ait.cars.model.Car;
+import HW18.details_trade_v2.details_v2.model_v2.Detail_v2;
+import HW18.details_trade_v2.details_v2.model_v2.Rugs_v2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GarageImplementationTest {
 
-private Garage garage;
-private Car[] c;
+ Garage garage;
+ Car[] cars;
 
 
     @BeforeEach
@@ -19,40 +21,60 @@ private Car[] c;
 
         garage = new GarageImplementation(5);
 
-        Car c[] = new Car [5];
+        cars = new Car [5];
 
-        c[0] = new Car("Number1", "Model1", "Company1", 1.5, "Red");
-        c[1] = new Car("Number2", "Model2", "Company1", 2.5, "Green");
-        c[2] = new Car("Number3", "Model1", "Company2", 1.5, "Red");
-        c[3] = new Car("Number4", "Model4", "Company2", 2.0, "Green");
+        cars[0] = new Car("Number1", "Model1", "Company1", 1.1, "Red");
+        cars[1] = new Car("Number2", "Model2", "Company1", 2.5, "Green");
+        cars[2] = new Car("Number3", "Model1", "Company2", 1.5, "Red");
+        cars[3] = new Car("Number4", "Model4", "Company2", 2.0, "Green");
 
-        //TODO добавить машины в гараж
+        //TODO add cars to garage
         for (int i = 0; i < 4; i++) {
-            garage.addCar(c[i]);
+            garage.addCar(cars[i]);
         }//end for
 
     }//end setUp
 
     @Test
     void addCarTest() {
-
-
-
-
+        //try to add null
+        assertFalse(garage.addCar(null));
+        //try to add duplicate
+        assertFalse(garage.addCar(cars[0]));
+        //add new car
+        Car carNew = new Car("Number 7", "M8","V8",3.5,"Green");
+        assertTrue(garage.addCar(carNew));
+        //check size
+        System.out.println(garage.size());
+        garage.printCars();
+        // try to add when no free space
+        Car carNew2 = new Car("Number 7", "M8","V8",3.5,"Green");
+        assertFalse(garage.addCar(carNew2));
     }//end addCarTest
 
     @Test
     void removeCarTest() {
-    }
+        //remove absent car
+        Car carNew2 = new Car("Number 7", "M8","V8",3.5,"Green");
+        assertNull(garage.removeCar("100000000000010l"));
+
+        //remove car
+        assertEquals(cars[0], garage.removeCar("Number1"));
+        garage.printCars();
+
+        //size
+        assertEquals(3, garage.size());
+
+    }//end removeCarTest
 
     @Test
     void findCarByRegNumberTest() {
-    }
+        assertEquals(cars[2], garage.findCarByRegNumber("Number3"));
+    }//end findCarByRegNumberTest
 
     @Test
     void findCarsByModelTest() {
-
-        Car[] expected = {c[0], c[2]};
+        Car[] expected = {cars[0], cars[2]};
         Car[] actual = garage.findCarsByModel("Model1");
         assertArrayEquals(expected, actual);
 
@@ -60,15 +82,21 @@ private Car[] c;
 
     @Test
     void findCarsByCompanyTest() {
-    }
+        Car [] exp = {cars[2], cars[3]};
+        assertArrayEquals(exp, garage.findCarsByCompany("Company2"));
+    }//end findCarsByCompanyTest
 
     @Test
     void findCarsByEngineTest() {
-    }
+        Car [] exp = {cars[0], cars[2]};
+        assertArrayEquals(exp, garage.findCarsByEngine(1,2));
+    }//end findCarsByEngineTest
 
     @Test
     void findCarsByColorTest() {
-    }
+        Car [] exp = {cars[1], cars[3]};
+        assertArrayEquals(exp, garage.findCarsByColor("Green"));
+    }//end findCarsByColorTest
 
     @Test
     void printCarsTest() {

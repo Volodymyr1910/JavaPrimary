@@ -28,6 +28,19 @@ public class SalesManager extends Employee {
         this.percent = percent;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("SalesManager{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", secondName='").append(secondName).append('\'');
+        sb.append(", hours=").append(hours);
+        sb.append(", salary=").append(calcSalary());
+        sb.append(", salesValue=").append(salesValue);
+        sb.append(", percent=").append(percent);
+        sb.append('}');
+        return sb.toString();
+    }
 
     @Override
     public double calcSalary() {

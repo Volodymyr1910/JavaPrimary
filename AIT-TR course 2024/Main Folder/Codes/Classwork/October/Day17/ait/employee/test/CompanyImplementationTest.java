@@ -133,7 +133,7 @@ class CompanyImplementationTest {
     }//end findEmployeeHoursGratedThanTest
 
     @Test
-    void findEmployeeSalaryRangeTest() {
+    void findEmployeeSalesRangeTest() {
 
         Employee [] any = new Employee[3];
 
@@ -141,7 +141,21 @@ class CompanyImplementationTest {
         any [1] = emp [5];
         any [2] = emp [6]; // from 20_000 to 45_000
 
-        assertArrayEquals(any, company.findEmployeeSalaryRange(20000,45000));
+        assertArrayEquals(any, company.findEmployeeSalesRange(20000,45000));
+
+    }//end findEmployeeSalesRangeTest
+
+    @Test
+    void findEmployeeSalaryRangeTest() {
+        company.printEmployee();
+        Employee [] any = new Employee[4];
+
+        any [0] = emp [1];
+        any [1] = emp [3];
+        any [2] = emp [4];
+        any [3] = emp [6]; // from 3_000 to 6_000
+
+        assertArrayEquals(any, company.findEmployeeSalaryRange(3000,6000));
 
     }//end findEmployeeSalaryRangeTest
 

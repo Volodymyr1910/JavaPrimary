@@ -85,7 +85,7 @@ Product_v2 [] prod;
     @Test
     void findProductsByQuantityInStorageLessThanTest() {
         Product_v2 product [] = {prod [0],prod [2],prod [4]};
-        assertArrayEquals(product, supermarketImplementation.findProductsByPrice(70));
+        assertArrayEquals(product, supermarketImplementation.findProductsByQuantityInStorageLessThan(70));
     }//end findProductsByQuantityInStorageLessThanTest
 
     @Test

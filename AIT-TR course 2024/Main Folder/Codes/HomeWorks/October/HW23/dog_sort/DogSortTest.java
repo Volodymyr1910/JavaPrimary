@@ -171,7 +171,7 @@ class DogSortTest {
         ArrayMethods_Object.printObjectArray(newDogs, "after sort by Friendly Level");
         DogSort newDog = new DogSort(160, 36, 24, 4, true, 18, 32, 3, "Akuna Matata");
         //DogSort newDog = new DogSort(73, 46, 46, 7, true, 54, 70, 10, "Spaniell");
-        // передали в поиск -> 1) массив в котором искать; 2 + 3) сказали искать с индекса 0 до индекса, который равен длине массива, с которого копировали данные в новый массив; 4) непосредственно паттерн, или образец обьекта который ищем; 4) компоратор, которым отсортирован массив, в котором ищем паттерн
+        // передали в поиск -> 1) массив в котором искать; 2 + 3) сказали искать с индекса 0 до индекса, который равен длине массива, с которого копировали данные в новый массив; 4) непосредственно паттерн, или образец обьекта который ищем; 5) компоратор, которым отсортирован массив, в котором ищем паттерн
         int index = Arrays.binarySearch(newDogs, 0, dogs.length, newDog, compByFriendlyLevel);
         if (index >= 0) System.out.println("Object with friendly level " + newDog.getFriendlyLevel() + " is in " + index + " index.");
         else {

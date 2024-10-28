@@ -7,6 +7,7 @@ import HW18.details_trade_v2.details_v2.model_v2.Gear_v2;
 import HW18.details_trade_v2.details_v2.model_v2.Lever_v2;
 import HW18.details_trade_v2.details_v2.model_v2.Rugs_v2;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -119,6 +120,7 @@ class StockImplementation_v2Test {
     }//end updateSparePartTest
 
     @Test
+    @DisplayName("Remove spare part TEST GOOD")
     void removeSparePartTest() {
         //remove absent spare part
         Detail_v2 detNew = new Rugs_v2(100000000000010l, 8,"M8",0.18,"V8",8,200, false);

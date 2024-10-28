@@ -2,6 +2,9 @@ package MyMethods.array_methods;
 
 import MyMethods.int_methods.IntMethods;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class ArrayMethods {
 
 //// ------------------------------------- Searching in array  ----------------------------------------------
@@ -23,6 +26,32 @@ public class ArrayMethods {
         }//end for
         return hereYouAre;
     }// end findIndexOfAnotherElement
+
+    //сортирует массив, ставя парные элементы и нули в очередности как в исходном массиве, а потом непарные, также в очередности как в исходном массиве
+    public static int[] transferArrayEvenAndZeroThanOddWithReturn(int[] array) {
+        Integer arrNew[] = new Integer[array.length];
+        for (int i = 0, h = 0; i < array.length; i++, h++) {
+            arrNew[h] = array[i];
+        }//end for
+        Comparator<Integer> comp = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                if (o1 % 2 == 0 && o2 % 2 != 0) {
+                    return -1; // number1 (четное) перед number2 (нечетным)
+                } else if (o1 % 2 != 0 && o2 % 2 == 0) {
+                    return 1; // number1 (нечетное) после number2 (четного)
+                } else {
+                    return 0; // Оба числа четные или оба нечетные
+                }//end else
+            }//end compare
+        };//end comparator
+        Arrays.sort(arrNew, comp);
+        int a[] = new int[array.length];
+        for (int i = 0, j = 0; i < arrNew.length; i++, j++) {
+            a[j] = arrNew[i];
+        }//end for
+        return a;
+    }//end transferArrayEvenAndZeroThanOddWithReturn
 
     //переносить d новий масив всі парні елементи, а потім всі непарні. *** число 0 відкидається ***
     //заповнює новий масив зліва на право
@@ -416,6 +445,8 @@ public class ArrayMethods {
             }//end for2
         }//end for1
     }//end bubleSortFromLowToBig
+
+
 
 //// ------------------------------------- Copy or transfer array with CHANGING ARRAY TYPE ------------------
 

@@ -45,8 +45,10 @@ public class AnimalHouseImplementation implements AnimalHouse_v2 {
         for (int i = 0; i < size; i++) {
             if (animals[i].getId() == id) {
                 Animal victim = animals[i];
-                animals[i] = animals[size - 1];
-                size--;
+                //animals[i] = animals[size - 1];
+                //size--;
+                System.arraycopy(animals, i + 1, animals, i, animals.length - i - 1);
+                animals[size--] = null;
                 return victim;
             }//end if
         }//end fori

@@ -38,6 +38,7 @@ public class MilkFood_v2 extends Food_v2 {
         sb.append(", name='").append(name).append('\'');
         sb.append(", barCode=").append(barCode);
         sb.append(", quantityInStorage=").append(quantityInStorage);
+        sb.append(", expDate='").append(getExpDate()).append('\'');
         sb.append(", milkType='").append(milkType).append('\'');
         sb.append(", fat=").append(fat);
         sb.append('}');

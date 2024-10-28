@@ -1,5 +1,6 @@
 package Day24.cities;
 
+import MyMethods.array_methods.ArrayMethods_Object;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -128,5 +129,58 @@ class CityTest {
         }//end if
     }//end testInsertKeepSorting
 
+//Проверьте работу метода System.arraycopy, скопировав часть массива.
+    @Test
+    void testSystemArrayCopy (){
+        //расширим массив на 2 элемента
+        City [] citiesCopyPlus2 = new City[cities.length + 2];
+        //копируем имеющийся в массив в новый
+        System.arraycopy(cities, 0,citiesCopyPlus2, 3, 5);
+        ArrayMethods_Object.printObjectArray(cities, "before coping");
+        ArrayMethods_Object.printObjectArray(citiesCopyPlus2, "after coping 4 elements");
+    }//end testSystemArrayCopy
+
+
+    //Проверьте работу метода Arrays.copyOfRange
+    @Test
+    void testSystemArrayCopyOfRange (){
+
+        printArray(cities,"original or source");
+        City [] citiesCopy = Arrays.copyOfRange(cities,5, cities.length +3);
+        //cities -> исходный массив,0 -> индекс с которого копировать в исходном массиве, cities.length -2 - > длина нового массива);
+        //City [] citiesCopy = Arrays.copyOfRange(cities,0, 3); -> новый массив получит со старого массива елементы с индексами 0, 1 и 2. Новый массив имеет размер 3.
+        // City [] citiesCopy = Arrays.copyOfRange(cities,0, cities.length -2);
+        // City [] citiesCopy = Arrays.copyOfRange(cities,0, cities.length +3);
+
+        printArray(citiesCopy, "after copy");
+
+
+
+
+    }//testSystemArrayCopyOfRange
+
+    //РАСШИРЕНИЕ МАССИВА с помощью метода arraycopy из класса System
+//System.arraycopy(citiesCopy7, index, citiesCopy7, index + 1, citiesCopy7.length - index - 1);
+    // здесь мы раздвигаем массив, двигая на 1 вправо.
+    //Значит после этой строки -> в массиве на индексе index стоит null. Это есть подготовка места для вставки в массив нового элемента, соблюдая сортировку массива.
+    // величину, сохраненную в переменную index - мы получаем с метода binarySearch в классе Arrays. Он должен в аргументах получить ТОТ ЖЕ кампаратор, которым отсортирован массив.
+
+    //ССУЖЕНИЕ МАССИВА с помощью метода arraycopy из класса System
+// System.arraycopy(employees, i + 1, employees, i, size - i - 1);
+    // здесь мы сдвигаем массив, двигая на 1 влево. Такое обычно делается после удаления с массива какого-то елемента.
+    // удаленный елемент стоял на индексе i. И сейчас здесь null. Поэтому и сдвигаем массив чтоб убрать null, соблюдая порядок сортировки массива.
+    // Значит после этой строки -> последний элемент массива и предпоследний - одинаковые.
+    // В ЦЕЛЯХ ЭКОНОМИИ ПАМЯТИ нужно приравнять последний элемент массива к null, т.к. он дубликат предпоследнего.
+    // После чего размер массива уменьшаем на 1, чтоб убрать нулевой элемент.
+    // Обнулить элемент и обрезать массив можно одной строкой -> employees[--size] = null;
+
+
+
+
+
+
+    //System.arraycopy
+    //Arrays.copyOf
+    //Arrays.copyOfRange
 
 }//end class

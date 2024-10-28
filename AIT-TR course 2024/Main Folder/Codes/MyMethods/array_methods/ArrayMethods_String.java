@@ -6,7 +6,37 @@ public class ArrayMethods_String {
 
 //// ------------------------------------- Other operations with array  -------------------------------------
 
-//// ------------------------------------- Sorting array ----------------------------------------------------
+    //// ------------------------------------- Sorting array ----------------------------------------------------
+
+    //сортирует массив с елементами типа String в обратном от алфавитного порядке
+    public static String[] bubleSortFrom_Z_to_A_WithReturn(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length - 1 - i; j++) {
+                int x = array[j].compareTo(array[j + 1]);
+                if (x <= 0) {
+                    String temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }//end if
+            }//end for2
+        }//end for1
+        return array;
+    }//end bubleSortFrom_Z_to_A_WithReturn
+
+    //сортирует массив с елементами типа String в алфавитном порядке
+    public static String[] bubleSortFrom_A_to_Z_WithReturn(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length - 1 - i; j++) {
+                int x = array[j].compareTo(array[j + 1]);
+                if (x > 0) {
+                    String temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }//end if
+            }//end for2
+        }//end for1
+        return array;
+    }//end bubleSortFrom_A_to_Z_WithReturn
 
 //// ------------------------------------- Copy or transfer array -------------------------------------------
 
@@ -35,7 +65,7 @@ public class ArrayMethods_String {
 
     // make copy elements from one STRING ARRAY to another INT ARRAY
     // розмір нового масиву такий самий як розмір масиву-донора
-    public static int [] copyArrayWithChangeStringToIntAutoSize (String[] arrayFrom) {
+    public static int[] copyArrayWithChangeStringToIntAutoSize(String[] arrayFrom) {
         int u = 0;
         int arrayTo[] = new int[arrayFrom.length];
         for (int i = 0; i < arrayFrom.length; i++) {

@@ -33,7 +33,10 @@ public class GarageImplementation implements Garage {
         for (int i = 0; i < size; i++) {
             if (cars[i].getRegNumber().equals(regNumber)) {
                 Car victim = cars[i];
-                cars[i] = cars[size - 1];
+                //cars[i] = cars[size - 1];
+                //size--;
+                System.arraycopy(cars, i +1, cars, i , cars.length - i - 1);
+                cars[cars.length -1] = null;
                 size--;
                 return victim;
             }//end if
@@ -89,14 +92,12 @@ public class GarageImplementation implements Garage {
     }//end sortCarsByCompany
 
     @Override
-
-
     public Car[] sortCarsByModel(Car [] cars) {
         return sortByAll(cars, "model");
     }// end sortCarsByModel
 
     @Override
-    public Car[] sortCarsByColor( Car [] cars) {
+    public Car[] sortCarsByColor(Car [] cars ) {
         return sortByAll(cars, "color");
     }//end sortCarsByColor
 
@@ -113,7 +114,6 @@ public class GarageImplementation implements Garage {
                     case "color" ->   res = o1.getColor().compareTo(o2.getColor());
                     case "engine" ->  res =  Double.compare(o1.getEngine(), o2.getEngine());
                 }
-
                 return res;
             }
         };

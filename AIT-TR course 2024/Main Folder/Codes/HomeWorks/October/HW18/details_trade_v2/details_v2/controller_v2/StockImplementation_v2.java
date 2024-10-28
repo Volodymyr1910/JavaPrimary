@@ -4,7 +4,6 @@ import HW18.details_trade_v2.details_v2.dao_v2.Stock_v2;
 import HW18.details_trade_v2.details_v2.model_v2.Detail_v2;
 import HW18.details_trade_v2.details_v2.model_v2.Gear_v2;
 import HW18.details_trade_v2.details_v2.model_v2.Lever_v2;
-import MyMethods.predicate_method.Predicate_method_notFinished;
 
 import java.util.function.Predicate;
 
@@ -115,8 +114,10 @@ public class StockImplementation_v2 implements Stock_v2 {
         for (int i = 0; i < size; i++) {
             if (details[i].getBarCode() == barCode) {
                 Detail_v2 victim = details[i];
-                details[i] = details[size - 1];
-                size--;
+                //details[i] = details[size - 1];
+                //size--;
+                System.arraycopy(details, i + 1, details, i, details.length - i - 1);
+                details[size--] = null;
                 return victim;
             }//end if
         }//end fori

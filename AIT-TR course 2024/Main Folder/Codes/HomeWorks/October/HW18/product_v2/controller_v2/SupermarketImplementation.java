@@ -5,6 +5,7 @@ import HW18.product_v2.dao_v2.Supermarket;
 import HW18.product_v2.model_v2.Food_v2;
 import HW18.product_v2.model_v2.Product_v2;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class SupermarketImplementation implements Supermarket {
@@ -31,8 +32,8 @@ public class SupermarketImplementation implements Supermarket {
         for (int i = 0; i < size; i++) {
             if (products[i].getBarCode() == barCode) {
                 Product_v2 victim = products[i];
-                products[i] = products[size - 1];
-                size--;
+               System.arraycopy(products, i + 1, products, i , products.length - i - 1);
+                products[size--] = null;
                 return victim;
             }//end if
         }//end fori
@@ -49,7 +50,10 @@ public class SupermarketImplementation implements Supermarket {
 
     @Override
     public Product_v2[] findProductsByExpireDate(String expDate) {
-       int count = 0;
+       // метод с помощью предиката
+        return findProductsByExpireDateByPredicate(products -> products instanceof Food_v2 && ((Food_v2) products).getExpDate().equals(expDate));
+        //классический метод
+       /*int count = 0;
         for (int i = 0; i < size; i++) {
             if(products[i] instanceof Food_v2){
                 if (((Food_v2) products[i]).getExpDate() == expDate)count++;
@@ -63,8 +67,22 @@ public class SupermarketImplementation implements Supermarket {
                 }//end if
             }//end if
         }//end for
-        return array;
+        return array; */
     }//end findProductsByExpireDate
+
+
+    private Product_v2[] findProductsByExpireDateByPredicate(Predicate<Product_v2> pred) {
+       Product_v2 arrayNew [] = new Product_v2[size];
+       int j = 0;
+        for (int i = 0; i < size; i++) {
+            if (pred.test(products[i])){
+                arrayNew[j++] = products[i];
+            }//end if
+        }//end for
+        return Arrays.copyOf(arrayNew, j);
+    }//end findProductsByExpireDate
+
+
 
     @Override
     public Product_v2[] findProductsByPrice(double price) {

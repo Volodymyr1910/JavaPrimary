@@ -7,8 +7,6 @@ import MyMethods.array_methods.ArrayMethods_Object;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GarageImplementationTest {
@@ -62,11 +60,11 @@ class GarageImplementationTest {
         assertNull(garage.removeCar("100000000000010l"));
 
         //remove car
-        assertEquals(cars[0], garage.removeCar("Number1"));
+        assertEquals(cars[5], garage.removeCar("Number1"));
         garage.printCars();
 
         //size
-        assertEquals(3, garage.size());
+        assertEquals(5, garage.size());
 
     }//end removeCarTest
 
@@ -156,7 +154,6 @@ class GarageImplementationTest {
         Car[] act = garage.sortCarsByColor(cars);
         ArrayMethods_Object.printObjectArray(act, "after sort by color");
         assertArrayEquals(exp, act);
-
 
     }//end sortCarsByColorTest
 }//end class

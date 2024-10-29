@@ -1,6 +1,6 @@
-package HW28.organizer.dao;
+package my_projects.organizer.dao;
 
-import HW28.organizer.model.Task;
+import my_projects.organizer.model.Task;
 
 public interface Operations {
 

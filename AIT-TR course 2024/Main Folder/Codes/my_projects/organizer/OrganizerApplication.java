@@ -1,6 +1,6 @@
-package HW28.organizer;
+package my_projects.organizer;
 
-import HW28.organizer.controller.YourOrganizer;
+import my_projects.organizer.controller.YourOrganizer;
 
 public class OrganizerApplication {
 

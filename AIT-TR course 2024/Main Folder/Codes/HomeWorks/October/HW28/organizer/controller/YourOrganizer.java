@@ -193,7 +193,7 @@ public class YourOrganizer implements Operations {
     public Task [] findArrayByPredicate (Predicate <Task> pred){
         int j = 0;
         Task thisTask [] = new Task[tasks.length];
-        for (int i = 0; j < size; i++) {
+        for (int i = 0; i < size; i++) {
             if(pred.test(tasks[i])){
                 thisTask[j++]= tasks[i];
             }//end if

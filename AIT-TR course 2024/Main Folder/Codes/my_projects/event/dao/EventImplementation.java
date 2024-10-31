@@ -1,11 +1,8 @@
-package HW30.event.dao;
+package my_projects.event.dao;
 
-import Day29.album.model.Photo;
-import HW30.event.model.Note;
+import my_projects.event.model.Note;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
@@ -80,7 +77,7 @@ public class EventImplementation implements Event {
         //return getByPredicate(n ->  n.getDate().isAfter(dateFrom.atStartOfDay().minusDays(1)) && n.getDate().isBefore(dateTo.atStartOfDay().plusDays(1)) ); // вариант решения, когда в итог попадают все "границы"
     }//end getNoteBetweenDate
 
-    public Note [] getByPredicate (Predicate <Note> pred) {
+    public Note[] getByPredicate (Predicate <Note> pred) {
         Note newArray [] = new Note[size];
         int j = 0;
         for (int i = 0; i < size; i++) {

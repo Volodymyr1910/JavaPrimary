@@ -1,11 +1,13 @@
 package Day29.album.dao;
 
 import Day29.album.model.Photo;
+import HW30.event.model.Note;
 import MyMethods.array_methods.ArrayMethods_Object;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 
 public class AlbumImpementation implements Album {
@@ -67,13 +69,23 @@ public class AlbumImpementation implements Album {
 
     @Override
     public Photo[] getAllPhotoFromAlbum(int albumId) {
-        return null;
+        return getByPredicate(p -> p.getAlbomId() == albumId);
     }//end getAllPhotoFromAlbum
 
     @Override
     public Photo[] getPhotoBetweenDate(LocalDate dateFrom, LocalDate dateTo) {
-        return new Photo[0];
-    }
+        return getByPredicate(n ->  n.getDate().toLocalDate().isAfter(dateFrom.minusDays(1)) && n.getDate().toLocalDate().isBefore(dateTo.plusDays(1)));
+    }//end getPhotoBetweenDate
+
+    public Photo[] getByPredicate (Predicate<Photo> pred) {
+        Photo newArray [] = new Photo[size];
+        int j = 0;
+        for (int i = 0; i < size; i++) {
+            if(pred.test(photos[i]))
+                newArray[j++] = photos[i];
+        }//end for
+        return Arrays.copyOf(newArray, j);
+    }//end getByPredicate
 
     @Override
     public void printPhoto() {

@@ -86,7 +86,7 @@ class AlbumImpementationTest {
 
     @Test
     void getAllPhotoFromAlbumTest() {
-        Photo[] exp = {photos[3], photos[4]};
+        Photo[] exp = {photos[3], photos[5], photos[4]};
         Photo[] act = album.getAllPhotoFromAlbum(2);
         assertArrayEquals(exp, act);
     }//end getAllPhotoFromAlbumTest
@@ -94,9 +94,9 @@ class AlbumImpementationTest {
     @Test
     void getPhotoBetweenDateTest() {
         LocalDate today = LocalDate.now();
-        Photo[] act = album.getPhotoBetweenDate(today.minusDays(2), today.minusDays(6));
+        Photo[] act = album.getPhotoBetweenDate(today.minusDays(6), today.minusDays(2));
         Arrays.sort(act, comparator);
-        Photo[] exp = {photos[5], photos[4], photos[2]};
+        Photo[] exp = {photos[2], photos[4], photos[5]};
         Arrays.sort(exp, comparator);
         assertArrayEquals(exp, act);
     }//end getPhotoBetweenDateTest

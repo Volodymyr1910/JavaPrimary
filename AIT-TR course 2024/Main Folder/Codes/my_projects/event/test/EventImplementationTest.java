@@ -1,9 +1,8 @@
-package HW30.event.test;
+package my_projects.event.test;
 
-import Day29.album.model.Photo;
-import HW30.event.dao.Event;
-import HW30.event.dao.EventImplementation;
-import HW30.event.model.Note;
+import my_projects.event.dao.Event;
+import my_projects.event.dao.EventImplementation;
+import my_projects.event.model.Note;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -79,17 +78,18 @@ class EventImplementationTest {
 
     @Test
     void getAllNoteFromEventTest() {
-        Note [] exp = {notes[3], notes[4]};
-        Note [] act = event.getAllNoteFromEvent(2);
+        Note[] exp = {notes[3], notes[4]};
+        Note[] act = event.getAllNoteFromEvent(2);
         assertArrayEquals(exp,act);
     }//end getAllNoteFromEventTest
 
     @Test
     void getNoteBetweenDateTest() {
         LocalDate today = LocalDate.now();
-        Note [] act = event.getNoteBetweenDate(today.minusDays(6), today.minusDays(2));
+        // т.к. мы ищем елементы за период в прошлом, левая цифра - период более дальний от текущего времени, чем правая, а правая цифра - соответственно более свежая дата
+        Note[] act = event.getNoteBetweenDate(today.minusDays(6), today.minusDays(2));
         Arrays.sort(act, comparator);
-        Note [] exp = {notes[0], notes[1], notes[3], notes[5]};
+        Note[] exp = {notes[0], notes[1], notes[3], notes[5]};
         Arrays.sort(exp, comparator);
         assertArrayEquals(exp,act);
 

@@ -24,6 +24,12 @@ public class DateOperation {
 
 
     public static String[] sortStringDates(String[] dates) {
+        //решение с помощью stream
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("[yyyy-MM-dd][dd/MM/yyyy]");
+        return Arrays.stream(dates).sorted((d1, d2)-> LocalDate.parse(d1, dateTimeFormatter).compareTo(LocalDate.parse(d2, dateTimeFormatter))).toArray(String[]::new);
+
+        /*
+
         // TODO Homework
 
         //нахожу элемент, не такой как все. Сохраняю его в переменную
@@ -65,7 +71,11 @@ public class DateOperation {
         // по ранее найденному индексу, заменяем элемент массива, придавая ему первоначальный формат
         dates[ind] = strForInsert;
 
-        return dates;
+        return dates; */
+
+
+
+
     }//end sortStringDates
 
 

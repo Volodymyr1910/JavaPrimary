@@ -1,8 +1,15 @@
 package my_projects.computer_shop;
 
+import HW18.cars.model.Car;
+import MyMethods.list_methods.ListMethods;
 import my_projects.computer_shop.model.Computer;
 import my_projects.computer_shop.model.Laptop;
 import my_projects.computer_shop.model.Smartphone;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 
 //Найти общий вес всех мобильных устройств в ComputerShop.
@@ -71,8 +78,6 @@ public class ShopApplication {
 
 
 
-
-
-
     }//end main
+
 }//end class

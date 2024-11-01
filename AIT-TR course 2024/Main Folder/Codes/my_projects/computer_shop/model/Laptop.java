@@ -52,18 +52,17 @@ public class Laptop extends Computer {
 
     @Override
     public String toString() {
-        return "Laptop{" +
-                "screenSize=" + screenSize +
-                ", weight=" + weight +
-                ", batteryCapasity=" + batteryCapasity +
-                ", color='" + color + '\'' +
-                "} " + super.toString();
+        final StringBuilder sb = new StringBuilder("Laptop{");
+        sb.append("cpu='").append(getCpu()).append('\'');
+        sb.append(", ram=").append(getRam());
+        sb.append(", ssd=").append(getSsd());
+        sb.append(", brand='").append(getBrand()).append('\'');
+        sb.append(", price=").append(getPrice());
+        sb.append("screenSize=").append(screenSize);
+        sb.append(", weight=").append(weight);
+        sb.append(", batteryCapasity=").append(batteryCapasity);
+        sb.append(", color='").append(color).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
-
-
-
-
-
-
-
 }//end class

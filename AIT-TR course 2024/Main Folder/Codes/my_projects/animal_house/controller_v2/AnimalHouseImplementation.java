@@ -1,5 +1,6 @@
 package my_projects.animal_house.controller_v2;
 
+import MyMethods.predicates.Predicate_method_notFinished;
 import my_projects.animal_house.dao_v2.AnimalHouse_v2;
 import my_projects.animal_house.model_v2.Animal;
 import my_projects.animal_house.model_v2.WildAnimal;
@@ -53,6 +54,10 @@ public class AnimalHouseImplementation implements AnimalHouse_v2 {
 
     @Override
     public Animal[] findSickAnimals() {
+        //Animal a = animal.isHealth();
+        //return Predicate_method_notFinished.findObjectByPredicateWithReturnObjectArray(animals -> animals.() == false, animals);
+
+
         int count = 0;
         for (int i = 0; i < size; i++) {
             if (!(animals[i].isHealth())) count++;

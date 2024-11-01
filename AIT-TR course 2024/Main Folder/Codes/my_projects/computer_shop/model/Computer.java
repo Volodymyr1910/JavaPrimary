@@ -1,6 +1,6 @@
 package my_projects.computer_shop.model;
 
-public class Computer {
+public class Computer implements Comparable <Computer>{
 
     private String cpu;
     private int ram;
@@ -59,19 +59,18 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "Computer{" +
-                "cpu='" + cpu + '\'' +
-                ", ram=" + ram +
-                ", ssd=" + ssd +
-                ", brand='" + brand + '\'' +
-                ", price=" + price +
-                '}';
+        final StringBuilder sb = new StringBuilder("Computer{");
+        sb.append("cpu='").append(cpu).append('\'');
+        sb.append(", ram=").append(ram);
+        sb.append(", ssd=").append(ssd);
+        sb.append(", brand='").append(brand).append('\'');
+        sb.append(", price=").append(price);
+        sb.append('}');
+        return sb.toString();
     }
 
-
-
-
-
-
-
+    @Override
+    public int compareTo(Computer o) {
+        return this.getBrand().compareTo(o.getBrand());
+    }
 }//end class

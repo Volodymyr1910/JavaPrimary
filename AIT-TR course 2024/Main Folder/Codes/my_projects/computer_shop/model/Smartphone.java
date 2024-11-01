@@ -19,23 +19,21 @@ public class Smartphone extends Laptop {
         this.imei = imei;
     }
 
-
     @Override
     public String toString() {
-        return "Smartphone{" +
-                "cpu='" + getCpu() + '\'' +
-                ", ram=" + getRam() +
-                ", ssd=" + getSsd() +
-                ", brand='" + getBrand() + '\'' +
-                ", price=" + getPrice() +
-                ", screenSize=" + getScreenSize() +
-                ", weight=" + getWeight() +
-                ", batteryCapasity=" + getBatteryCapasity() +
-                ", color='" + getColor() + '\'' +
-                ", imei=" + imei +
-                '}';
+        final StringBuilder sb = new StringBuilder("Smartphone{");
+        sb.append("cpu='").append(getCpu()).append('\'');
+        sb.append(", ram=").append(getRam());
+        sb.append(", ssd=").append(getSsd());
+        sb.append(", brand='").append(getBrand()).append('\'');
+        sb.append(", price=").append(getPrice());
+        sb.append("screenSize=").append(getScreenSize());
+        sb.append(", weight=").append(getWeight());
+        sb.append(", batteryCapasity=").append(getBatteryCapasity());
+        sb.append(", color='").append(getColor()).append('\'');
+        sb.append("imei=").append(imei);
+        sb.append('}');
+        return sb.toString();
     }
-
-
 }//end class
 

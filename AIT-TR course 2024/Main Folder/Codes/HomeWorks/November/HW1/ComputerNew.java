@@ -1,6 +1,6 @@
 package HW1;
 
-import MyMethods.list_methods.ListMethods;
+import MyMethods.list.list_methods.ListMethods;
 import my_projects.computer_shop.model.Computer;
 import my_projects.computer_shop.model.Laptop;
 import my_projects.computer_shop.model.Smartphone;

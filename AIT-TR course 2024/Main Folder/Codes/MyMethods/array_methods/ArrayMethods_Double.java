@@ -128,18 +128,14 @@ public class ArrayMethods_Double {
 
     // возвращает среднее арифметическое значение всех элементов массива.
     public static double averageValueDouble(double[] array) {
-        double sum = 0;
-        for (int i = 0; i < array.length; i++) {
-            sum = sum + array[i];
-        }//end for
-        return sum / array.length;
+        return sumArrayDouble(array) / array.length;
     }//end averageValueDouble
 
     // возвращает сумму всех элементов массива.
     public static double sumArrayDouble(double[] array) {
         double sum = 0;
         for (int i = 0; i < array.length; i++) {
-            sum = sum + array[i];
+            sum += array[i];
         }
         return sum;
     }//end sumArrayDouble

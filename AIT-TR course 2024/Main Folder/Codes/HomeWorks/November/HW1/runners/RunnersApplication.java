@@ -1,6 +1,6 @@
 package HW1.runners;
 
-import MyMethods.list_methods.ListMethods;
+import MyMethods.list.list_methods.ListMethods;
 
 import java.util.*;
 

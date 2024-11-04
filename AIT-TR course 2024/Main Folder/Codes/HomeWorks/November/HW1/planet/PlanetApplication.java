@@ -1,8 +1,7 @@
 package HW1.planet;
 
 
-import HW1.planets.Planets;
-import MyMethods.list_methods.ListMethods;
+import MyMethods.list.list_methods.ListMethods;
 
 import java.util.ArrayList;
 import java.util.Collections;

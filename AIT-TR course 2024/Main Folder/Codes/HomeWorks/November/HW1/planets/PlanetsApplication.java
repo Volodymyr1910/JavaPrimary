@@ -1,7 +1,6 @@
 package HW1.planets;
 
-import HW18.cars.model.Car;
-import MyMethods.list_methods.ListMethods;
+import MyMethods.list.list_methods.ListMethods;
 
 import java.util.*;
 ////Output a list of planets sorted by:
@@ -14,7 +13,6 @@ import java.util.*;
 public class PlanetsApplication {
 
     public static void main(String[] args) {
-        // List<Planets> planetsList = List.of(Planets.MERCURY, Planets.Venus, Planets.MARS,Planets.URANUS, Planets.EARTH, Planets.NEPTUNE, Planets.JUPITER, Planets.SATURN);
         List<Planets> planetsList = new ArrayList<>();
 
         planetsList.add(Planets.MERCURY);

@@ -1,7 +1,7 @@
 package HW4.linked_list;
 
-public interface NodeList extends Iterable <E>{
-
+public interface NodeList /*extends Iterable <E> */{
+/*
     // прописываем методы
 
     int size(); // размер листа
@@ -32,5 +32,5 @@ public interface NodeList extends Iterable <E>{
     int lastIndexOf(Object o);
     E remove(int index); // удаление из листа узла по его индекс (номеру)
     E set(int index, E element);
-
+*/
 }//end class

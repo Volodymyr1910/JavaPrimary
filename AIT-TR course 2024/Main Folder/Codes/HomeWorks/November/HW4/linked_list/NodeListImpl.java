@@ -1,7 +1,8 @@
 package HW4.linked_list;
 
-public class NodeListImpl implements NodeList{
+public class NodeListImpl implements NodeList {
 
+    /*
 
     // fields
     private Node<E> first;
@@ -79,6 +80,9 @@ public class NodeListImpl implements NodeList{
            метод `getNodeByIndex` позволяет получить узел в связанном списке по заданному индексу,
             пройдясь от начала или конца списка в зависимости от индекса.
      */
+
+    /*
+
     private Node<E> getNodeByIndex(int index) {
         checkIndex(index);
         Node<E> node;
@@ -114,9 +118,9 @@ public class NodeListImpl implements NodeList{
         if (o != null) { // внутри узла не null и он есть
             for (Node<E> node = first; node != null; node = node.next, index++) { // цикл, который перебирает узлы
 
-               for (int i = 0;  i < index  ; i++) {
-                 node = node.next;
-               }
+                for (int i = 0; i < index; i++) {
+                    node = node.next;
+                }
 
                 if (o.equals(node.data)) {
                     return index;
@@ -139,7 +143,7 @@ public class NodeListImpl implements NodeList{
         if (o != null) { // внутри узла не null и он есть
             for (Node<E> node = last; node != null; node = node.prev, index--) { // цикл, который перебирает узлы
 
-                for (int i = size - 1;  i > index  ; i--) {
+                for (int i = size - 1; i > index; i--) {
                     node = node.prev;
                 }
 
@@ -197,6 +201,7 @@ public class NodeListImpl implements NodeList{
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             Node<E> current = first;
+
             @Override
             public boolean hasNext() {
                 return current != null;
@@ -214,6 +219,6 @@ public class NodeListImpl implements NodeList{
 
 
 
-
+*/
 
 }//end class

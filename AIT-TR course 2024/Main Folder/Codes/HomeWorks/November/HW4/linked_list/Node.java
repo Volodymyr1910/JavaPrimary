@@ -1,7 +1,7 @@
 package HW4.linked_list;
 
 public class Node {
-
+/*
 
     // fields
     Node<E> prev; // тип Node - взялся от Java
@@ -24,7 +24,7 @@ public class Node {
 
 
 
-
+*/
 
 
 

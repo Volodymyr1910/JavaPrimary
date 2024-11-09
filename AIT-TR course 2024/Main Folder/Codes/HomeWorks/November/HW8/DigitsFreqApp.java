@@ -23,11 +23,13 @@ public class DigitsFreqApp {
             str.append(random.nextInt(100, 1001));
         }//end while
 
+        // create map for results
         Map <Integer, Integer> numbersMap = new HashMap<>(Map.of(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0) );
         for (int i = 0; i < str.length(); i++) {
             numbersMap.put(str.charAt(i)- '0', (numbersMap.get(str.charAt(i)- '0') + 1));
         }//end for
-        System.out.println();
+
+        //print results
         numbersMap.forEach((key, value)-> System.out.println(key + " : " + value));
 
     }//end main

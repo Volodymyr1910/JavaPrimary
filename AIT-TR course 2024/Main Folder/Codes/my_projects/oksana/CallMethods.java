@@ -5,18 +5,24 @@ public class CallMethods {
 
     public static void main(String[] args) {
 
-    // тут викликаємо наших героїв
-
-
-
-        
-
+        //pr777();
+       pr888();
 
     }//end main
 
 
-    // описуємо поведінку наших героїв
+    public static void pr888() {
 
+        System.out.println(" HI !");
+
+    }//end pr
+
+
+    public static void pr777() {
+
+        System.out.println(" HI Misha !");
+
+    }//end pr
 
 
 

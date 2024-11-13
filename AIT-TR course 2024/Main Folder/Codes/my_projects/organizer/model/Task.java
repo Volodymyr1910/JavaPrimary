@@ -1,6 +1,8 @@
 package my_projects.organizer.model;
 
-public class Task implements  Comparable <Task>{
+import java.io.Serializable;
+
+public class Task implements  Comparable <Task>, Serializable {
 
     private int numOfTask;
     private String task;

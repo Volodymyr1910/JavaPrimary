@@ -5,12 +5,13 @@ import my_projects.organizer.dao.Operations;
 import my_projects.organizer.model.Organizer;
 import my_projects.organizer.model.Task;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
-public class YourOrganizer implements Operations {
-
+public class YourOrganizer implements Operations, Serializable {
+    //Scanner scanner = new Scanner(System.in);
 
     Task[] tasks;
     int size;
@@ -64,7 +65,7 @@ public class YourOrganizer implements Operations {
 
                 case 7 -> {
                     checker = false;
-                    System.out.println("Whait for you later. Bye !");
+                    System.out.println("Wait for you later. Bye !");
                 }
                 default -> System.out.println("I'm sorry, don't understand you.");
 

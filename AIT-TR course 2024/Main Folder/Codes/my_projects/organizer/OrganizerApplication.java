@@ -2,31 +2,22 @@ package my_projects.organizer;
 
 import my_projects.organizer.controller.YourOrganizer;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import static my_projects.organizer.controller.YourOrganizer.loadOrganizer;
+import static my_projects.organizer.controller.YourOrganizer.saveOrganizer;
+
 
 public class OrganizerApplication {
 
     public static void main(String[] args) {
+        //каждый запуск начинается с загрузки информации
+        YourOrganizer note = loadOrganizer();
 
-
-        YourOrganizer note = new YourOrganizer(100);
+        //работа с программой
         note.mainMenu();
 
-        try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("my_notes.dat"))){
-
-             ous.writeObject(note);
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }//end main
-
+        // при завершении работы авто-сохранение
+        saveOrganizer(note);
+    }
 
 }//end class

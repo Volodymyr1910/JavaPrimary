@@ -41,12 +41,7 @@ public class Task implements  Comparable <Task>, Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Task{");
-        sb.append("numOfTask=").append(numOfTask);
-        sb.append(", task='").append(task).append('\'');
-        sb.append(", whenMustBeReady='").append(whenMustBeReady).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Task " + numOfTask + ". " + task + ". Dedline -> " + whenMustBeReady +".";
     }
 
     @Override

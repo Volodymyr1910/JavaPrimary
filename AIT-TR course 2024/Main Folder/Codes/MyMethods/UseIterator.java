@@ -1,4 +1,4 @@
-package MyMethods.list;
+package MyMethods;
 
 import java.util.ArrayList;
 import java.util.Iterator;

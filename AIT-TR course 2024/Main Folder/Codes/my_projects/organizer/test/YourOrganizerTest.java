@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class YourOrganizerTest {
     YourOrganizer notes;
@@ -13,7 +14,7 @@ class YourOrganizerTest {
 
     @BeforeEach
     void setUp() {
-        notes = new YourOrganizer(100);
+        notes = new YourOrganizer(6);
         tasks = new Task[4];
         tasks[0] = new Task(1, "AAAA", "23.33.100");
         tasks[1] = new Task(2, "BBB", "23.33.200");
@@ -32,8 +33,13 @@ class YourOrganizerTest {
 
     @Test
     void addNewtaskTest() {
+        //порожня нотатка і порожня дата
+       //assertFalse(notes.addNewtask());
+        //дублікат
+
+        //нова нотатка
         notes.addNewtask();
-        assertEquals(1, notes.quantity());
+        assertEquals(5, notes.quantity());
     }//end addNewtaskTest
 
     @Test

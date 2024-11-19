@@ -4,6 +4,7 @@ import dao.OperationsImpl;
 import model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import view.CurrencyExchange;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ class OperationsImplTest {
     void findTrans() {
         Transaction found = operations.findTrans(3);
         assertNull(found);
-        assertEquals(3,found.getNumber());
+        assertEquals(3, found.getNumber());
         Transaction notFound = operations.findTrans(111);
     }
 
@@ -67,7 +68,7 @@ class OperationsImplTest {
 
         // так как true- продажа, false -покупка, находим транзакции данного типа
         // сначала проверяем, что метод возвращает только продажи
-        List<Transaction> saleTransactions = operations.findTransByType("USD",true);
+        List<Transaction> saleTransactions = operations.findTransByType("USD", true);
         // исходя из тестового набора данных, ожидается 2 продажи
         assertEquals(2, saleTransactions.size());
         // проверяем валюты продаж
@@ -75,7 +76,7 @@ class OperationsImplTest {
         assertEquals("USD", saleTransactions.get(1).getName());
 
         // аналогичныу тесты для покупки
-        List<Transaction> buyingTransactions = operations.findTransByType("USD",false);
+        List<Transaction> buyingTransactions = operations.findTransByType("USD", false);
         assertEquals(0, buyingTransactions.size());
         assertEquals("EUR", buyingTransactions.get(0).getName());
         assertEquals("GPB", buyingTransactions.get(1).getName());
@@ -91,30 +92,28 @@ class OperationsImplTest {
 
     @Test
     void calcRes() {
-
-        double amountToExchange = 100;
-        String currencyName = "USD";
-        double rate = 0.9178;
-        double marge = rate * 0.05;
-        // вычитаем маржу для продажи
-        double rateWithMarge = rate - marge;
-        // ожидаемый результат от продажи
-        double expectedResult = amountToExchange * rateWithMarge;
-
-        double actualResult = operations.calcRes(currencyName, amountToExchange, 2);  // для продажи
-
-        assertEquals(expectedResult, actualResult, 0.01);
-
+        // тестируем покупку USD
+        double actualUsdBuying = operations.calcRes("USD", 100);
+        double expectedUsdBuying = 100 / (CurrencyExchange.USD.getCurrent_exchange() + CurrencyExchange.USD.getCurrent_exchange() * 0.05);//узнаем сколько получим с покупки 100 долларов
+        assertEquals(expectedUsdBuying, actualUsdBuying, 0.001);
+        // продажa USD
+        double actualUsdSell = operations.calcRes("USD", -100);
+        double expectedUsdSell = 100 * (CurrencyExchange.USD.getCurrent_exchange() - CurrencyExchange.USD.getCurrent_exchange() * 0.05);// узнаем сколько получим с продажи 100 долларов
+        assertEquals(expectedUsdSell, actualUsdSell, 0.001);
+        // делаем тест на покупку не существующей валюты
+        double invalidRes = operations.calcRes("INVALID", 100);
+        assertEquals(0, invalidRes);// так как валюты не существует, то и результат получим 0
     }
+
 
     @Test
     void calcMarge() {
-        String currencyCode = "USD";
-        double rate = 0.9178;
-        double expectedMarge = rate * 0.05;
-        //рассчитываем маржу с помощьюметода
-        double actualMarge = operations.calcMarge(currencyCode);
-        assertEquals(expectedMarge, actualMarge, 0.01);
+        // рассчитываем маржу для доллара
+        double usdMargin = operations.calcMarge("USD");
+        assertEquals(0.05 * CurrencyExchange.USD.getCurrent_exchange(), usdMargin, 0.001);
+        // несуществующая валюта
+        double invalidMargin = operations.calcMarge("INVALID");
+        assertEquals(0, invalidMargin);// так как такой валюты нет, то и маржа будет 0
     }
 
 } // end of class

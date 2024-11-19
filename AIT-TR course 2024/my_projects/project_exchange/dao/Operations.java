@@ -21,37 +21,10 @@ public interface Operations {
 
     int quantity();
 
-    double calcRes(String name, double amount, int operationType);
+    double calcRes(String name, double amount);
 
     double calcMarge(String name);
 
     void printTrans();
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 } // end of class

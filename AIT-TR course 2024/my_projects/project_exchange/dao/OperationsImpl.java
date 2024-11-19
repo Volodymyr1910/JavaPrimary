@@ -103,24 +103,29 @@ public class OperationsImpl implements Operations {
             choice = scanner.nextInt();
             switch (choice){
                 case 1 -> {
+                    System.out.println("Input new currency :");
                     scanner.next();
                     valuta = scanner.nextLine();
                     temp.setName(valuta);
                 }
                 case 2 -> {
+                    System.out.println("Input new quantity :");
                     scanner.next();
                     amount = scanner.nextDouble();
                 }
                 case 3 -> {
+                    System.out.println(" Choose new type. Press 1 - for sell, or 2 - for buy:");
                     scanner.next();
                    tempNum = scanner.nextInt();
                    type = tempNum == 1 ? true : false;
                     temp.setType(type);
                 }
+                case 4 -> System.out.println("Done.");
                 default -> System.out.println("Wrong input !");
             }//end switch
         }while (choice != 4);
-        double newRes =  calcRes(valuta, amount, type);
+        if(tempNum == 2) amount = amount * (-1);
+        double newRes =  calcRes(valuta, amount);
         double newMarge =  calcMarge(valuta);
         temp.setRes(newRes);
         temp.setMarge(newMarge);
@@ -157,7 +162,7 @@ public class OperationsImpl implements Operations {
         System.out.println("Let's work a little bit :)");
         int mainChoise;
 
-        double amountChoise;
+        double amountChoise = 0;
         String valuta = null;
         do {
             int typeChoice = chooseType();
@@ -166,7 +171,9 @@ public class OperationsImpl implements Operations {
                 amountChoise = scanner.nextDouble();
             } while (amountChoise < 1);
             valuta = chooseCurrency();
-            double result = calcRes(valuta, amountChoise, typeChoice);
+            // если сумма 'amount' положительная — это покупка, если отрицательная — это продажа.
+            if(typeChoice == 2) amountChoise = amountChoise * (-1);
+                double result = calcRes(valuta, amountChoise);
             double margeResult = calcMarge(valuta);
 
             // true or 1 -  продажа, false or 2 - покупка
@@ -184,6 +191,7 @@ public class OperationsImpl implements Operations {
     }//end mainMenu
 
     public int chooseType() {
+        // если сумма 'amount' положительная — это покупка, если отрицательная — это продажа.
         int typeChoice;
         do {
             System.out.println(" Press 1 - for sell, or 2 - for buy:");
@@ -269,34 +277,66 @@ public class OperationsImpl implements Operations {
         return transactions.size();
     }
 
+
     @Override
-    public double calcRes(String currencyCode, double amount, int operationType) {
-        //поиск валюты по коду
-        CurrencyExchange currency = CurrencyExchange.findByCode(currencyCode);
-        if (currency == null) {
-            throw new IllegalArgumentException("Currency with code " + currencyCode + " not found.");
+    public double calcRes(String name, double amount) // название валюты и сумма для обмена
+    // если сумма 'amount' положительная — это покупка, если отрицательная — это продажа.
+    {
+        CurrencyExchange currency = null; // ищем курс в enum
+        for (CurrencyExchange ce : CurrencyExchange.values())
+        {
+            if (ce.getCurrency_codes().equals(name)) // название валюты "name" передано в этот метод
+            {
+                currency = ce;
+                break;
+            }
         }
-
+        // если валюта не найдена, сообщаем об этом и возвращаем 0
+        if (currency == null) {
+            System.out.println("Currency with code " + name + " not found");
+            return 0;
+        }
+        // получили курс из enum для валюты
         double rate = currency.getCurrent_exchange();
-        double marge = rate * 0.05;
-        double rateWithMarge = (operationType == 2) ? (rate - marge) : (rate + marge);
-
-
-        return (operationType == 2) ? amount * rateWithMarge : amount / rateWithMarge;
+        // маржа для курса валюты, через метод calcMarge
+        double margin = calcMarge(name);
+        double rateWithMargin = 0; // курс с маржей
+        if (amount < 0) { //  если < 0 = продажа, иначе покупка
+            rateWithMargin = rate - margin;  // если продажа, то маржа вычитается
+        } else {
+            rateWithMargin = rate + margin;  // если покупка, то маржа добавляется
+        }
+        //  результат обмена с учетом маржи
+        double result = 0;
+        if (amount < 0) {  // опять, если сумма отрицательная — это продажа
+            result = Math.abs(amount) * rateWithMargin;  // продаем валюту и получаем евро
+        } else {  // Покупка
+            result = Math.abs(amount) / rateWithMargin;  // покупаем валюту за евро
+        }
+        System.out.println("Result of the exchange " + result + " EUR");
+        return result;
     }
-
-
     @Override
-    public double calcMarge(String name) {
-
-        CurrencyExchange currency = CurrencyExchange.findByCode(name);
-        if (currency == null) {
-            throw new IllegalArgumentException("Currency with code " + name + " not found.");
+    public double calcMarge(String currencyName)
+    {
+        //  курс по названию валюты
+        CurrencyExchange currency = null;
+        for (CurrencyExchange ce : CurrencyExchange.values()) {
+            if (ce.getCurrency_codes().equals(currencyName)) {
+                currency = ce;
+                break;
+            }
         }
+        //  валюта не найдена, тогда -> 0
+        if (currency == null) {
+            System.out.println("Валюта с кодом " + currencyName + " не найдена.");
+            return 0;
+        }
+        // вытаскиваем курс для данной валюты
         double rate = currency.getCurrent_exchange();
-        double marge = rate * 0.05;
-
-        return marge;
+        //  маржа (5% от курса)
+        double margin = rate * 0.05;
+        return margin;
     }
 
 

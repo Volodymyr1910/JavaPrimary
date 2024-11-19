@@ -42,22 +42,32 @@ public class OperationsImpl implements Operations {
             int actionNum = scanner.nextInt();
             LocalDate dateFrom;
             LocalDate dateTo;
-
             switch (actionNum) {
                 case 1 -> {
                     System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + " Good !");
                     mainMenu();
                 }
                 case 2 -> {
-                    System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + " Forgott something? Here is all your transactions:");
-                    System.out.println();
-                    System.out.println("Start date");
-                    dateFrom = dateFromUserToSystem();
-                    System.out.println("Finish date");
-                    dateTo = dateFromUserToSystem();
-                    findTransByDate(dateFrom, dateTo); // здесь нужно приземлить и распечатать результат
+                    System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + " Input the number, please:");
+                    int num = scanner.nextInt();
+                    Transaction findedTrans = findTrans(num);
+                    if (findedTrans == null) System.out.println("No such transaction.");
+                    else System.out.println(findedTrans);
                 }
                 case 3 -> {
+                    System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + " All transactions:");
+                    System.out.println();printTrans();
+                }
+                case 4 -> {
+                    System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + " Forgott something? Input data, please");
+                    System.out.println();
+                    System.out.println("Start date:");
+                    dateFrom = dateFromUserToSystem();
+                    System.out.println("Finish date:");
+                    dateTo = dateFromUserToSystem();
+                    printTrans(findTransByDate(dateFrom, dateTo));
+                }
+                case 5 -> {
                     System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction());
                     String valuta = chooseCurrency();
                     System.out.println();
@@ -65,19 +75,19 @@ public class OperationsImpl implements Operations {
                     boolean typeFin = typeChoice == 1 ? true : false;
                     findTransByType(valuta, typeFin);
                 }
-                case 4 -> {
+                case 6 -> {
                     System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + "Enter the transaction number, you want to update:");
                     int numUpdate = scanner.nextInt();
-                    if (updateTrans(numUpdate))System.out.println(" Update Successful !");
+                    if (updateTrans(numUpdate, transNewData()))System.out.println(" Update Successful !");
                     else System.out.println("No such transaction");
                 }
-                case 5 -> {
+                case 7 -> {
                     System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction() + " Enter the transaction number, you want to delete:");
                     int numRemove = scanner.nextInt();
                     if (removeTrans(numRemove))System.out.println(" Update Successful !");
                     else System.out.println("No such transaction");
                 }
-                case 6 -> {
+                case 8 -> {
                     checker = false;
                     System.out.println("Wait for you later. Bye !");
                 }
@@ -88,6 +98,7 @@ public class OperationsImpl implements Operations {
 
     }//end startMenu
 
+    /*
     public boolean updateTrans ( int numUpdate) {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;  int tempNum = 0;
@@ -104,10 +115,8 @@ public class OperationsImpl implements Operations {
             choice = scanner.nextInt();
             switch (choice){
                 case 1 -> {
-                    System.out.println("Input new currency :");
-                    scanner.next();
-                    valuta = scanner.nextLine();
-                    temp.setName(valuta);
+                    System.out.println("Choose new currency.");
+                    temp.setName(chooseCurrency());
                 }
                 case 2 -> {
                     System.out.println("Input new quantity :");
@@ -115,10 +124,8 @@ public class OperationsImpl implements Operations {
                     amount = scanner.nextDouble();
                 }
                 case 3 -> {
-                    System.out.println(" Choose new type. Press 1 - for sell, or 2 - for buy:");
-                    scanner.next();
-                   tempNum = scanner.nextInt();
-                   type = tempNum == 1 ? true : false;
+                    System.out.println(" Choose new type.");
+                   type = chooseType() == 1 ? true : false;
                     temp.setType(type);
                 }
                 case 4 -> System.out.println("Done.");
@@ -131,8 +138,93 @@ public class OperationsImpl implements Operations {
         temp.setRes(newRes);
         temp.setMarge(newMarge);
         return true;
+    }//end updateTrans */
+
+    public boolean updateTrans ( int numUpdate, Transaction newTr ) {
+        Transaction updateTr = findTrans(numUpdate);
+        if (updateTr == null) return false;
+        else System.out.println(updateTr);
+        System.out.println();
+        //приходит c новыми именем, типом, ресом и маржой; локал дейт и номер не должны измениться
+        updateTr.setName(newTr.getName());
+        updateTr.setType(newTr.isType());
+        updateTr.setRes(newTr.getRes());
+        updateTr.setMarge(newTr.getMarge());
+        return true;
     }//end updateTrans
 
+    public Transaction transNewData (){
+        Transaction newTr = new Transaction(0,null,false, null, 0, 0);
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;  int tempNum = 0;
+        String valuta = null;
+        double amount = 0;
+        boolean type = false;
+        do {
+            System.out.println("press for update: 1 -> new currency, 2 -> new quantity, 3 -> new type , 4 -> exit");
+            // запрос через сканер на ввод новой валюты и количества и типа операции
+            choice = scanner.nextInt();
+            switch (choice){
+                case 1 -> {
+                    System.out.println("Choose new currency.");
+                    newTr.setName(chooseCurrency());
+                }
+                case 2 -> {
+                    System.out.println("Input new quantity :");
+                    scanner.next();
+                    amount = scanner.nextDouble();
+                }
+                case 3 -> {
+                    System.out.println(" Choose new type.");
+                    type = chooseType() == 1 ? true : false;
+                    newTr.setType(type);
+                }
+                case 4 -> System.out.println("Done.");
+                default -> System.out.println("Wrong input !");
+            }//end switch
+        }while (choice != 4);
+        if(tempNum == 2) amount = amount * (-1);
+        double newRes =  calcRes(valuta, amount);
+        double newMarge =  calcMarge(valuta);
+        newTr.setRes(newRes);
+        newTr.setMarge(newMarge);
+        return newTr; // c новыми именем, типом, ресом и маржой; локал дейт и номер не должны измениться
+    }//end transNewData
+
+    public int chooseType() {
+        // если сумма 'amount' положительная — это покупка, если отрицательная — это продажа.
+        Scanner scanner = new Scanner(System.in);
+        int typeChoice;
+        do {
+            System.out.println(" Press 1 - for sell, or 2 - for buy:");
+            typeChoice = scanner.nextInt();
+        } while (typeChoice < 1 || typeChoice > 2);
+        return typeChoice;
+    }//end chooseType
+
+
+    public String chooseCurrency() {
+        Scanner scanner = new Scanner(System.in);
+        int currencyChoise;
+        String valuta = null;
+        do {
+            System.out.println("Choose currency, please:");
+            int tempNum = 1;
+            for (CurrencyExchange choise : CurrencyExchange.values()) {
+                System.out.println(" press " + tempNum++ + " - for " + choise.getCurrency_codes());
+            }//end for
+            currencyChoise = scanner.nextInt();
+        } while (currencyChoise < 1 || currencyChoise > 6);
+        switch (currencyChoise) {
+            case 1 -> valuta = "USD";
+            case 2 -> valuta = "AUD";
+            case 3 -> valuta = "EGP";
+            case 4 -> valuta = "KZT";
+            case 5 -> valuta = "GBP";
+            case 6 -> valuta = "FJD";
+        }//end switch
+        return valuta;
+    }//end chooseCurrency
 
     public LocalDate dateFromUserToSystem() {
         Scanner scanner = new Scanner(System.in);
@@ -196,40 +288,7 @@ public class OperationsImpl implements Operations {
 
     }//end mainMenu
 
-    public int chooseType() {
-        // если сумма 'amount' положительная — это покупка, если отрицательная — это продажа.
-        Scanner scanner = new Scanner(System.in);
-        int typeChoice;
-        do {
-            System.out.println(" Press 1 - for sell, or 2 - for buy:");
-            typeChoice = scanner.nextInt();
-        } while (typeChoice < 1 || typeChoice > 2);
-        return typeChoice;
-    }//end chooseType
 
-
-    public String chooseCurrency() {
-        Scanner scanner = new Scanner(System.in);
-        int currencyChoise;
-        String valuta = null;
-        do {
-            System.out.println("Choose currency, please:");
-            int tempNum = 1;
-            for (CurrencyExchange choise : CurrencyExchange.values()) {
-                System.out.println(" press " + tempNum++ + " - for " + choise.getCurrency_codes());
-            }//end for
-            currencyChoise = scanner.nextInt();
-        } while (currencyChoise < 1 || currencyChoise > 6);
-        switch (currencyChoise) {
-            case 1 -> valuta = "USD";
-            case 2 -> valuta = "AUD";
-            case 3 -> valuta = "EGP";
-            case 4 -> valuta = "KZT";
-            case 5 -> valuta = "GBP";
-            case 6 -> valuta = "FJD";
-        }//end switch
-        return valuta;
-    }//end chooseCurrency
 
     @Override
     public Transaction addTrans(int num, String name, boolean type, LocalDate date, double res, double marge) {
@@ -301,7 +360,7 @@ public class OperationsImpl implements Operations {
         }
         // если валюта не найдена, сообщаем об этом и возвращаем 0
         if (currency == null) {
-            System.out.println("Currency with code " + name + " not found");
+            System.out.println("Currency " + name + " not found.");
             return 0;
         }
         // получили курс из enum для валюты
@@ -337,7 +396,7 @@ public class OperationsImpl implements Operations {
         }
         //  валюта не найдена, тогда -> 0
         if (currency == null) {
-            System.out.println("Валюта с кодом " + currencyName + " не найдена.");
+            System.out.println("Currency " + currencyName + " not found.");
             return 0;
         }
         // вытаскиваем курс для данной валюты
@@ -354,6 +413,16 @@ public class OperationsImpl implements Operations {
             System.out.println("The transaction list is empty.");
         } else {
             for (Transaction transaction : transactions) {
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public void printTrans(List <Transaction> newList) {
+        if (newList.isEmpty()) {
+            System.out.println("The transaction list is empty.");
+        } else {
+            for (Transaction transaction : newList) {
                 System.out.println(transaction);
             }
         }

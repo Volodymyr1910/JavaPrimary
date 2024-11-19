@@ -54,12 +54,38 @@ class OperationsImplTest {
         boolean resNotFound = operations.removeTrans(111);
     }
 
+    @Test
     void findTrans() {
         Transaction found = operations.findTrans(3);
         assertNotNull(found);
         assertEquals(3,found.getNumber());
         Transaction notFound = operations.findTrans(111);
 
+    }
+
+    @Test
+    void UpdateTrans() {
+        // successfully update
+        Transaction newTr = new Transaction(0, "EGP", true, LocalDate.now().plusDays(3), 500, 3.0);
+        boolean resultSuccess = operations.updateTrans(2, newTr);
+        assertTrue(resultSuccess, "Update should be successful");
+
+        Transaction updatedTr = operations.findTrans(2);
+        assertNotNull(updatedTr, "Updated transaction should't be null");
+        assertEquals("EGP", updatedTr.getName());
+        assertTrue(updatedTr.isType());
+        assertEquals(500, updatedTr.getRes());
+        assertEquals(3.0, updatedTr.getMarge());
+        assertEquals(2, updatedTr.getNumber());
+        assertEquals(LocalDate.now().minusDays(1), updatedTr.getDate());
+
+        //try to update non-existent transaction
+        boolean resultNotFound = operations.updateTrans(111, newTr);
+        assertFalse(resultNotFound, "Update should fail for non-existent transaction");
+
+        // try update to null transaction
+        boolean resultNullTransaction = operations.updateTrans(2, null);
+        assertFalse(resultNullTransaction, "Update should fail for null transaction");
     }
 
     @Test

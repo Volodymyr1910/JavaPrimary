@@ -3,7 +3,14 @@ package view;
 public enum StartMenu {
 
 
-    START_WORKING(1, "Start a working day."), TRANS_REPORT_BY_DATE (2, "List of transactions by date"), CURRENCY_REPORT (3, "Report on all currencies"), UPDATE_TRANS(4, "Update transaction"), REMOVE_TRANS (5, "Remove transaction"), EXIT (6, "End of the working day.")
+    START_WORKING(1, "Start a working day."),
+    FIND_TRANS(2,"Find transaction by number."),
+    ALL_TRANS (3, "General list of transactions."),
+    TRANS_REPORT_BY_DATE (4, "List of transactions by date"),
+    CURRENCY_REPORT (5, "Report on all currencies"),
+    UPDATE_TRANS(6, "Update transaction"),
+    REMOVE_TRANS (7, "Remove transaction"),
+    EXIT (8, "End of the working day.")
     ;
 
 

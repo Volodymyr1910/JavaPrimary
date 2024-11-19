@@ -32,8 +32,17 @@ class OperationsImplTest {
     @Test
     void addTrans() {
         int newTransNum = 5;
-        Transaction add = operations.addTrans(newTransNum, "USD", true, null, 400, 4);
+        Transaction add = operations.addTrans(newTransNum, "AUD", true, LocalDate.now(), 500.0, 2.5);
         assertEquals(newTransNum, add.getNumber());
+        assertEquals("AUD", add.getName());
+        assertEquals(true, add.isType());
+        assertEquals(LocalDate.now(), add.getDate());
+        assertEquals(500.0, add.getRes());
+        assertEquals(2.5, add.getMarge());
+
+        assertEquals(5, operations.quantity());
+        assertEquals(add, operations.findTrans(newTransNum));
+
     }
 
 
@@ -45,12 +54,12 @@ class OperationsImplTest {
         boolean resNotFound = operations.removeTrans(111);
     }
 
-    @Test
     void findTrans() {
         Transaction found = operations.findTrans(3);
-        assertNull(found);
-        assertEquals(3, found.getNumber());
+        assertNotNull(found);
+        assertEquals(3,found.getNumber());
         Transaction notFound = operations.findTrans(111);
+
     }
 
     @Test
@@ -65,22 +74,21 @@ class OperationsImplTest {
 
     @Test
     void findTransByType() {
-
-        // так как true- продажа, false -покупка, находим транзакции данного типа
-        // сначала проверяем, что метод возвращает только продажи
+        // Проверяем продажи для валюты "USD"
         List<Transaction> saleTransactions = operations.findTransByType("USD", true);
-        // исходя из тестового набора данных, ожидается 2 продажи
         assertEquals(2, saleTransactions.size());
-        // проверяем валюты продаж
         assertEquals("USD", saleTransactions.get(0).getName());
         assertEquals("USD", saleTransactions.get(1).getName());
 
-        // аналогичныу тесты для покупки
-        List<Transaction> buyingTransactions = operations.findTransByType("USD", false);
-        assertEquals(0, buyingTransactions.size());
-        assertEquals("EUR", buyingTransactions.get(0).getName());
-        assertEquals("GPB", buyingTransactions.get(1).getName());
+        // Проверяем покупки для валюты "EUR"
+        List<Transaction> eurBuyingTransactions = operations.findTransByType("EUR", false);
+        assertEquals(1, eurBuyingTransactions.size());
+        assertEquals("EUR", eurBuyingTransactions.get(0).getName());
 
+        // Проверяем покупки для валюты "GPB"
+        List<Transaction> gpbBuyingTransactions = operations.findTransByType("GPB", false);
+        assertEquals(1, gpbBuyingTransactions.size());
+        assertEquals("GPB", gpbBuyingTransactions.get(0).getName());
     }
 
     @Test

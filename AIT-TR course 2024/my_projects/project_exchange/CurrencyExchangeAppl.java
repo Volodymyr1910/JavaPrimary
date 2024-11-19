@@ -1,5 +1,7 @@
 import dao.OperationsImpl;
 
+import java.util.Scanner;
+
 import static dao.OperationsImpl.loadTransactions;
 import static dao.OperationsImpl.saveTransactions;
 
@@ -13,7 +15,7 @@ public class CurrencyExchangeAppl {
         OperationsImpl transaction = loadTransactions();
 
         //работа с программой
-        transaction.mainMenu();
+        transaction.startMenu();
 
         // при завершении работы авто-сохранение
         saveTransactions(transaction);

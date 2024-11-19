@@ -37,7 +37,7 @@ public class OperationsImpl implements Operations {
 
         while (checker) {
             System.out.println("How can I help?");
-            projectsInProcess.organizer.model.Organizer.printMenu();
+            StartMenu.printMenu();
             Scanner scanner = new Scanner(System.in);
             int actionNum = scanner.nextInt();
             LocalDate dateFrom;
@@ -89,6 +89,7 @@ public class OperationsImpl implements Operations {
     }//end startMenu
 
     public boolean updateTrans ( int numUpdate) {
+        Scanner scanner = new Scanner(System.in);
         int choice = 0;  int tempNum = 0;
         String valuta = null;
         double amount = 0;
@@ -134,6 +135,7 @@ public class OperationsImpl implements Operations {
 
 
     public LocalDate dateFromUserToSystem() {
+        Scanner scanner = new Scanner(System.in);
         LocalDate date = null;
         String dateTemp;
         do {
@@ -159,6 +161,7 @@ public class OperationsImpl implements Operations {
 
     @Override
     public void mainMenu() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Let's work a little bit :)");
         int mainChoise;
 
@@ -179,7 +182,7 @@ public class OperationsImpl implements Operations {
             // true or 1 -  продажа, false or 2 - покупка
             boolean typeFin = typeChoice == 1 ? true : false;
             Collections.sort(transactions);
-            int transactionNum = transactions.size() + 1;
+            int transactionNum = transactions.size();
             addTrans(transactionNum, valuta, typeFin, null, result, margeResult);
             do {
                 System.out.println(" Press 1 - for continue, or 0 - for exit:");
@@ -192,6 +195,7 @@ public class OperationsImpl implements Operations {
 
     public int chooseType() {
         // если сумма 'amount' положительная — это покупка, если отрицательная — это продажа.
+        Scanner scanner = new Scanner(System.in);
         int typeChoice;
         do {
             System.out.println(" Press 1 - for sell, or 2 - for buy:");
@@ -226,7 +230,7 @@ public class OperationsImpl implements Operations {
     @Override
     public Transaction addTrans(int num, String name, boolean type, LocalDate date, double res, double marge) {
         transactions.add(transactions.size(), new Transaction(num, name, type, date, res, marge));
-        return transactions.get(transactions.size());
+        return transactions.get(transactions.size()-1);
     }//end addTrans
 
     @Override

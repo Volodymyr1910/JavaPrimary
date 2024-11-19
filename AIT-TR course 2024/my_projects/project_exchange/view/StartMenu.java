@@ -36,7 +36,7 @@ public enum StartMenu {
 
     public static void printMenu (){
         System.out.println("-------------------Choose action by pressing number 1 - 6: -----------------------");
-        projectsInProcess.organizer.model.Organizer myO [] = projectsInProcess.organizer.model.Organizer.values();
+        StartMenu myO [] = StartMenu.values();
         for (Object o : myO) {
             System.out.println(o);
         }//end for

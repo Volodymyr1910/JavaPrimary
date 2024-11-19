@@ -1,6 +1,6 @@
-package HW5.money;
+package money;
 
-import HW5.money.dao.ExchangeImplementation;
+import money.dao.ExchangeImplementation;
 
 public class ExchangeApplication {
 

@@ -1,10 +1,10 @@
-package HW5.money.dao;
+package money.dao;
 
-import HW5.money.model.Money;
+import money.model.Money;
 
 import java.util.Scanner;
 
-public class ExchangeImplementation implements Exchange {
+public class ExchangeImplementation implements money.dao.Exchange {
 
     Scanner scanner = new Scanner(System.in);
     Money money;

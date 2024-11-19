@@ -1,4 +1,4 @@
-package HW5.money.dao;
+package money.dao;
 
 public interface Exchange {
 

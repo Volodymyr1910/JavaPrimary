@@ -55,7 +55,7 @@ public class OperationsImpl implements Operations {
                     dateFrom = dateFromUserToSystem();
                     System.out.println("Finish date");
                     dateTo = dateFromUserToSystem();
-                    findTransByDate(dateFrom, dateTo);
+                    findTransByDate(dateFrom, dateTo); // здесь нужно приземлить и распечатать результат
                 }
                 case 3 -> {
                     System.out.println(actionNum + ". " + moneyday[actionNum - 1].getAction());
@@ -181,13 +181,16 @@ public class OperationsImpl implements Operations {
 
             // true or 1 -  продажа, false or 2 - покупка
             boolean typeFin = typeChoice == 1 ? true : false;
-            Collections.sort(transactions);
-            int transactionNum = transactions.size();
+            //Collections.sort(transactions);
+            int transactionNum = 0;
+            if (transactions.isEmpty()) transactionNum = 1;
+            else transactionNum = transactions.size();
+            //int transactionNum = transactions.size() == 0 ? 1 : transactions.size();
             addTrans(transactionNum, valuta, typeFin, null, result, margeResult);
             do {
                 System.out.println(" Press 1 - for continue, or 0 - for exit:");
                 mainChoise = scanner.nextInt();
-            } while (mainChoise != 1 || mainChoise != 0);
+            } while ( mainChoise != 0);  //(mainChoise != 1 || mainChoise != 0);
             if (mainChoise == 0) System.out.println(" See you soon ;)");
         } while (mainChoise != 0);
 
@@ -206,6 +209,7 @@ public class OperationsImpl implements Operations {
 
 
     public String chooseCurrency() {
+        Scanner scanner = new Scanner(System.in);
         int currencyChoise;
         String valuta = null;
         do {
@@ -355,7 +359,26 @@ public class OperationsImpl implements Operations {
         }
     }
 
-
+    //файл Насти
+    public static OperationsImpl loadTransactions() {
+        File file = new File(STORAGE);
+        if (file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                System.out.println("Load Data from storage...");
+                OperationsImpl ops = (OperationsImpl) ois.readObject();
+                if (ops.transactions == null) {
+                    ops.transactions = new ArrayList<>(); // Инициализируем список, если он пуст
+                }
+                return ops;
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Error loading data: " + e.getMessage());
+            }
+        }
+        // Если файла не существует
+        System.out.println("Create new organizer...");
+        return new OperationsImpl(new ArrayList<>()); // Инициализируем пустой список
+    }
+        /*
     public static OperationsImpl loadTransactions() {
         File file = new File(STORAGE);
         if (file.exists()) {
@@ -369,7 +392,7 @@ public class OperationsImpl implements Operations {
         // Если файла не существует
         System.out.println("Create new organizer...");
         return new OperationsImpl(null);
-    }//loadTransactions
+    }//loadTransactions */
 
     public static void saveTransactions(OperationsImpl note) {
         try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(STORAGE))) {
